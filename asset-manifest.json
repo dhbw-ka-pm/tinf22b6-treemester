@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/tinf22b6-treemester/static/css/main.073c9b0a.css",
-    "main.js": "/tinf22b6-treemester/static/js/main.b535c660.js",
-    "static/media/logo.svg": "/tinf22b6-treemester/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "main.css": "/tinf22b6-treemester/static/css/main.af4a78de.css",
+    "main.js": "/tinf22b6-treemester/static/js/main.df324080.js",
+    "static/media/logo.svg": "/tinf22b6-treemester/static/media/logo.34e52c57c292e61030051d4d7da7bc12.svg",
     "index.html": "/tinf22b6-treemester/index.html",
-    "main.073c9b0a.css.map": "/tinf22b6-treemester/static/css/main.073c9b0a.css.map",
-    "main.b535c660.js.map": "/tinf22b6-treemester/static/js/main.b535c660.js.map"
+    "main.af4a78de.css.map": "/tinf22b6-treemester/static/css/main.af4a78de.css.map",
+    "main.df324080.js.map": "/tinf22b6-treemester/static/js/main.df324080.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.b535c660.js"
+    "static/css/main.af4a78de.css",
+    "static/js/main.df324080.js"
   ]
 }
