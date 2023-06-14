@@ -21,3 +21,26 @@
 .App-link {
   color: #61dafb;
 }
+
+svg {
+	width: 100vw;
+	height: 100vh;
+}
+
+svg * {
+	transform: translate(25%,5%);
+}
+
+html, body, #root, .App, .chart{
+	height: stretch;
+	width: stretch;
+}
+
+button{
+	margin: 1vh 1vw 1vh 1vw;
+}
+
+.tree{
+	font-size: 0.5em;
+}
+
