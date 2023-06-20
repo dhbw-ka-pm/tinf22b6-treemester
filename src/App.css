@@ -22,18 +22,8 @@
   color: #61dafb;
 }
 
-svg {
-	width: 100vw;
-	height: 100vh;
-}
-
-svg * {
-	transform: translate(25%,5%);
-}
-
-html, body, #root, .App, .chart{
-	height: stretch;
-	width: stretch;
+svg g{
+  transform: translate(50%, 50%);
 }
 
 button{
