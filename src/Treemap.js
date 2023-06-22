@@ -1,22 +1,22 @@
-import * as d3 from "d3";
-import React, { useRef, useEffect, useState } from "react";
+import * as d3 from "d3"
+import React, { useRef, useEffect } from "react"
 
 function Treemap(params){
-    const ref = useRef();
-    var data = params.data;
+    const ref = useRef()
+    var data = params.data
 
     useEffect(() => {
         const svg = d3.select(ref.current)
             .style("border", "none")
-    }, []);
+    }, [])
 
     useEffect(() => {
-        draw();
-    }, [data]);
+        draw()
+    }, [data])
 
     const draw = () => {
-        const svg = d3.select(ref.current);
-        svg.selectAll("*").remove();
+        const svg = d3.select(ref.current)
+        svg.selectAll("*").remove()
 
         const treeLayout = d3.tree()
             .separation((a, b) => {
@@ -31,10 +31,10 @@ function Treemap(params){
                                 b.data.name.length / 5
                                 : b.data.value / 5
                         )
-                    ) + 1/5
+                    ) + (1 / 5)
             })
-            .nodeSize([80,120]);
-        var root = d3.hierarchy(data, d => d.children);
+            .nodeSize([80, 120])
+        var root = d3.hierarchy(data, d => d.children)
         treeLayout(root)
 
 
@@ -45,12 +45,12 @@ function Treemap(params){
             .enter()
             .append("line")
             .attr("class", "link")
-            .style("stroke", d => "grey")
+            .style("stroke", "grey")
             .style("fill", "none")
-            .attr("x1", function (d) { return d.parent ? d.x : null; })
-            .attr("y1", function (d) { return d.parent ? d.y : null; })
-            .attr("x2", function (d) { return d.parent ? d.parent.x : null; })
-            .attr("y2", function (d) { return d.parent ? d.parent.y : null; });
+            .attr("x1", function (d) { return d.parent ? d.x : null })
+            .attr("y1", function (d) { return d.parent ? d.y : null })
+            .attr("x2", function (d) { return d.parent ? d.parent.x : null })
+            .attr("y2", function (d) { return d.parent ? d.parent.y : null })
 
         g.selectAll("node")
             .data(root.descendants())
@@ -59,23 +59,23 @@ function Treemap(params){
             .attr("r", d => d.data.value)
             .attr("cx", d => d.x)
             .attr("cy", d => d.y)
-            .style("stroke", d => "black")
-            .style("fill", d => "white")
-            .on("click", (_,d) => {
+            .style("stroke", "black")
+            .style("fill", "white")
+            .on("click", (_, d) => {
                 console.log("Click")
                 console.log(_)
                 console.log(d.data.name)
-                var text = document.getElementById("newNodeText").value;
+                var text = document.getElementById("newNodeText").value
                 var childNode = {
                     "name": text,
                     "value": 10,
                 }
                 if (!d.data.children) {
-                    d.data.children = [];
+                    d.data.children = []
                 }
-                d.data.children.push(childNode);
-                draw();
-            });
+                d.data.children.push(childNode)
+                draw()
+            })
 
         g.selectAll(".node")
             .data(root.descendants())
@@ -84,7 +84,7 @@ function Treemap(params){
             .attr("x", d => d.x)
             .attr("y", d => d.y + d.data.value + 15)
             .style("text-anchor", "middle")
-            .text(d => d.data.name);
+            .text(d => d.data.name)
     }
 
     return (
@@ -94,10 +94,10 @@ function Treemap(params){
                 <p>Click on a node to add a child with the specified text</p>
             </div>
             <div className="chart">
-                <svg ref={ref }></svg>
+                <svg ref={ref}></svg>
             </div>
         </>
     )
 }
 
-export default Treemap;
+export default Treemap

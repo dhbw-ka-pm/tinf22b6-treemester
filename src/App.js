@@ -1,5 +1,5 @@
-import './App.css';
-import CirclePacking from './CirclePacking';
+import './App.css'
+import CirclePacking from './CirclePacking'
 
 const circleTestData = {
     "name": "Theoretische Informatik",
@@ -56,21 +56,16 @@ const circleTestData = {
 
 
 function App() {
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Treemester is a software for students and other people, who are struggling with learning and are in need of better topical guidance 
-              </p>
-              <div className="tree">
-                  <CirclePacking data={circleTestData}></CirclePacking>
-              </div>
-              </header>
-          
-    </div>
+    return (
+        <div className="App">
+            <header className="App-header">
+                <p>Treemester is a software for students and other people, who are struggling with learning and are in need of better topical guidance</p>
+                <div className="tree">
+                    <CirclePacking data={circleTestData}></CirclePacking>
+                </div>
+            </header>
+        </div>
     );
 }
 
-export default App;
-
+export default App
