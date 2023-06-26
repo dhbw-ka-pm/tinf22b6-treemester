@@ -1,5 +1,7 @@
-import './App.css'
-import CirclePacking from './CirclePacking'
+import React, { useState } from 'react';
+import './App.css';
+import CirclePacking from './CirclePacking';
+import About from './About';
 
 const circleTestData = {
     "name": "Theoretische Informatik",
@@ -56,16 +58,46 @@ const circleTestData = {
 
 
 function App() {
+    const [currentPage, setCurrentPage] = useState('Circles');
+  
+    const handleNavigationClick = (page) => {
+      setCurrentPage(page);
+    };
+  
     return (
-        <div className="App">
-            <header className="App-header">
-                <p>Treemester is a software for students and other people, who are struggling with learning and are in need of better topical guidance</p>
-                <div className="tree">
-                    <CirclePacking data={circleTestData}></CirclePacking>
+      <div className="App">
+        <header className="App-header">
+          <nav className="navigation">
+                <div className='label'>
+                    <p>&#127795;   Treemester</p>
                 </div>
-            </header>
-        </div>
+            <ul>
+              <li className={currentPage === 'About the Project' ? 'active' : ''}>
+                <button onClick={() => handleNavigationClick('About the Project')}>
+                  About the Project
+                </button>
+              </li>
+              <li className={currentPage === 'Circles' ? 'active' : ''}>
+                <button onClick={() => handleNavigationClick('Circles')}>
+                  Circles
+                </button>
+              </li>
+            </ul>
+          </nav>
+          {/* <p>Treemester is a software for students and other people who are struggling with learning and are in need of better topical guidance</p> */}
+          {currentPage === 'Circles' && (
+            <div className="tree">
+              <CirclePacking data={circleTestData} />
+            </div>
+          )}
+           {currentPage === 'About the Project' && (
+            <div className="about">
+              <About />
+            </div>
+          )}
+        </header>
+      </div>
     );
-}
-
-export default App
+  }
+  
+  export default App;
