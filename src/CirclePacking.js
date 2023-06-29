@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import React, { useEffect } from 'react';
 
-export default function CirclePackaging(props) {
+function CirclePackaging(props) {
     const data = props.data;
 
     useEffect(() => {
@@ -128,3 +128,5 @@ export default function CirclePackaging(props) {
         </div>
     );
 }
+
+export default CirclePackaging;
