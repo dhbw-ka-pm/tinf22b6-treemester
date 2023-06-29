@@ -6,16 +6,12 @@ function Treemap(params) {
     var data = params.data;
 
     useEffect(() => {
-        const svg = d3.select(ref.current)
-            .style('border', 'none');
-    }, []);
-
-    useEffect(() => {
         draw();
     }, [data]);
 
     const draw = () => {
-        const svg = d3.select(ref.current);
+        const svg = d3.select(ref.current)
+            .style('border', 'none');
         svg.selectAll('*').remove();
 
         const treeLayout = d3.tree()
