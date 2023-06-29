@@ -61,7 +61,11 @@ function App() {
     const [currentPage, setCurrentPage] = useState('Circles');
   
     const handleNavigationClick = (page) => {
-        setCurrentPage(page);
+        if (currentPage !== page) {
+            setCurrentPage(page);
+        } else {
+            setCurrentPage('Circles');
+        }
     };
   
     return (
@@ -77,17 +81,12 @@ function App() {
                                 About the Project
                             </button>
                         </li>
-                        <li className={currentPage === 'Circles' ? 'active' : ''}>
-                            <button onClick={() => handleNavigationClick('Circles')}>
-                                Circles
-                            </button>
-                        </li>
                     </ul>
                 </nav>
                 {currentPage === 'Circles' && (
-                <div className="tree">
-                    <CirclePacking data={circleTestData} />
-                </div>
+                    <div className="tree">
+                        <CirclePacking data={circleTestData} />
+                    </div>
                 )}
                 {currentPage === 'About the Project' && (
                     <div className="about">
