@@ -84,7 +84,7 @@ function App() {
                     </ul>
                 </nav>
                 {currentPage === 'Circles' && (
-                    <div className="tree">
+                    <div className="circles">
                         <CirclePacking data={circleTestData} />
                     </div>
                 )}

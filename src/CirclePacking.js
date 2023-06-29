@@ -123,9 +123,7 @@ function CirclePackaging(props) {
     }, [data]);
 
     return (
-        <div className="circles">
-            <svg width="800" height="680"></svg>
-        </div>
+        <svg height="100%" width="100%"></svg>
     );
 }
 
