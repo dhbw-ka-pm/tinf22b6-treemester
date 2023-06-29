@@ -61,43 +61,42 @@ function App() {
     const [currentPage, setCurrentPage] = useState('Circles');
   
     const handleNavigationClick = (page) => {
-      setCurrentPage(page);
+        setCurrentPage(page);
     };
   
     return (
-      <div className="App">
-        <header className="App-header">
-          <nav className="navigation">
-                <div className='label'>
-                    <p>&#127795;   Treemester</p>
+        <div className="App">
+            <header className="App-header">
+                <nav className="navigation">
+                    <div className="label">
+                        <p>&#127795;   Treemester</p>
+                    </div>
+                    <ul>
+                        <li className={currentPage === 'About the Project' ? 'active' : ''}>
+                            <button onClick={() => handleNavigationClick('About the Project')}>
+                                About the Project
+                            </button>
+                        </li>
+                        <li className={currentPage === 'Circles' ? 'active' : ''}>
+                            <button onClick={() => handleNavigationClick('Circles')}>
+                                Circles
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+                {currentPage === 'Circles' && (
+                <div className="tree">
+                    <CirclePacking data={circleTestData} />
                 </div>
-            <ul>
-              <li className={currentPage === 'About the Project' ? 'active' : ''}>
-                <button onClick={() => handleNavigationClick('About the Project')}>
-                  About the Project
-                </button>
-              </li>
-              <li className={currentPage === 'Circles' ? 'active' : ''}>
-                <button onClick={() => handleNavigationClick('Circles')}>
-                  Circles
-                </button>
-              </li>
-            </ul>
-          </nav>
-          {/* <p>Treemester is a software for students and other people who are struggling with learning and are in need of better topical guidance</p> */}
-          {currentPage === 'Circles' && (
-            <div className="tree">
-              <CirclePacking data={circleTestData} />
-            </div>
-          )}
-           {currentPage === 'About the Project' && (
-            <div className="about">
-              <About />
-            </div>
-          )}
-        </header>
-      </div>
+                )}
+                {currentPage === 'About the Project' && (
+                    <div className="about">
+                        <About />
+                    </div>
+                )}
+            </header>
+        </div>
     );
-  }
+}
   
-  export default App;
+export default App;

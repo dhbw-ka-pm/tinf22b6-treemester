@@ -1,86 +1,81 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 .App-header {
-  background-color: #454545;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #454545;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 svg g {
-  transform: translate(50%, 50%);
+    transform: translate(50%, 50%);
 }
 
 button {
-  margin: 1vh 1vw 1vh 1vw;
+    margin: 1vh 1vw 1vh 1vw;
 }
 
 .tree {
-  font-size: 0.5em;
+    font-size: 0.5em;
 }
 
 .active {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .navigation {
-  width: 100%;
-  height: 70px;
-  background-color: black;
-  box-shadow: 5px 5px 5px #454545;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    width: 100%;
+    height: 70px;
+    background-color: black;
+    box-shadow: 5px 5px 5px #454545;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .navigation ul {
-  list-style-type: none;
-  padding: 0;
-  display: flex;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
 }
 
 .navigation li {
-  margin-right: 10px;
+    margin-right: 10px;
 }
 
 .navigation button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: white;
 }
 
 .navigation button:focus {
-  outline: none;
-  font-weight: bolder;
+    outline: none;
+    font-weight: bolder;
 }
 
 .label {
-  margin: 10px;
-  color: white;
-  font-size: 25px;
+    margin: 10px;
+    color: white;
+    font-size: 25px;
 }
-/* .description {
-  
-} */
-
-

@@ -1,22 +1,22 @@
-import * as d3 from "d3"
-import React, { useRef, useEffect } from "react"
+import * as d3 from 'd3';
+import React, { useRef, useEffect } from 'react';
 
-function Treemap(params){
-    const ref = useRef()
-    var data = params.data
+function Treemap(params) {
+    const ref = useRef();
+    var data = params.data;
 
     useEffect(() => {
         const svg = d3.select(ref.current)
-            .style("border", "none")
-    }, [])
+            .style('border', 'none');
+    }, []);
 
     useEffect(() => {
-        draw()
-    }, [data])
+        draw();
+    }, [data]);
 
     const draw = () => {
-        const svg = d3.select(ref.current)
-        svg.selectAll("*").remove()
+        const svg = d3.select(ref.current);
+        svg.selectAll('*').remove();
 
         const treeLayout = d3.tree()
             .separation((a, b) => {
@@ -31,60 +31,57 @@ function Treemap(params){
                                 b.data.name.length / 5
                                 : b.data.value / 5
                         )
-                    ) + (1 / 5)
+                    ) + (1 / 5);
             })
-            .nodeSize([80, 120])
-        var root = d3.hierarchy(data, d => d.children)
-        treeLayout(root)
+            .nodeSize([80, 120]);
+        var root = d3.hierarchy(data, d => d.children);
+        treeLayout(root);
 
 
-        var g = svg.append("g")
+        var g = svg.append('g');
 
-        g.selectAll(".link")
+        g.selectAll('.link')
             .data(root.descendants().slice(1))
             .enter()
-            .append("line")
-            .attr("class", "link")
-            .style("stroke", "grey")
-            .style("fill", "none")
-            .attr("x1", function (d) { return d.parent ? d.x : null })
-            .attr("y1", function (d) { return d.parent ? d.y : null })
-            .attr("x2", function (d) { return d.parent ? d.parent.x : null })
-            .attr("y2", function (d) { return d.parent ? d.parent.y : null })
+            .append('line')
+            .attr('class', 'link')
+            .style('stroke', 'grey')
+            .style('fill', 'none')
+            .attr('x1', function (d) { return d.parent ? d.x : null })
+            .attr('y1', function (d) { return d.parent ? d.y : null })
+            .attr('x2', function (d) { return d.parent ? d.parent.x : null })
+            .attr('y2', function (d) { return d.parent ? d.parent.y : null });
 
-        g.selectAll("node")
+        g.selectAll('node')
             .data(root.descendants())
             .enter()
-            .append("circle")
-            .attr("r", d => d.data.value)
-            .attr("cx", d => d.x)
-            .attr("cy", d => d.y)
-            .style("stroke", "black")
-            .style("fill", "white")
-            .on("click", (_, d) => {
-                console.log("Click")
-                console.log(_)
-                console.log(d.data.name)
-                var text = document.getElementById("newNodeText").value
+            .append('circle')
+            .attr('r', d => d.data.value)
+            .attr('cx', d => d.x)
+            .attr('cy', d => d.y)
+            .style('stroke', 'black')
+            .style('fill', 'white')
+            .on('click', (_, d) => {
+                var text = document.getElementById('newNodeText').value;
                 var childNode = {
-                    "name": text,
-                    "value": 10,
+                    'name': text,
+                    'value': 10,
                 }
                 if (!d.data.children) {
-                    d.data.children = []
+                    d.data.children = [];
                 }
-                d.data.children.push(childNode)
-                draw()
-            })
+                d.data.children.push(childNode);
+                draw();
+            });
 
-        g.selectAll(".node")
+        g.selectAll('.node')
             .data(root.descendants())
             .enter()
-            .append("text")
-            .attr("x", d => d.x)
-            .attr("y", d => d.y + d.data.value + 15)
-            .style("text-anchor", "middle")
-            .text(d => d.data.name)
+            .append('text')
+            .attr('x', d => d.x)
+            .attr('y', d => d.y + d.data.value + 15)
+            .style('text-anchor', 'middle')
+            .text(d => d.data.name);
     }
 
     return (
@@ -97,7 +94,7 @@ function Treemap(params){
                 <svg ref={ref}></svg>
             </div>
         </>
-    )
+    );
 }
 
-export default Treemap
+export default Treemap;
