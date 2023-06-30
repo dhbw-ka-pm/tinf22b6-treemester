@@ -1,7 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import CirclePacking from './CirclePacking';
 import About from './About';
+import Layout from './Layout';
+
+import {
+    BrowserRouter,
+    Routes,
+    Route,
+} from "react-router-dom";
 
 const circleTestData = {
     "name": "Theoretische Informatik",
@@ -40,7 +47,7 @@ const circleTestData = {
                 {
                     "name": "Induktionsschritt",
                     "value": 60,
-                    "children":[
+                    "children": [
                         {
                             "name": "Induktionsannahme",
                             "value": 45
@@ -57,45 +64,23 @@ const circleTestData = {
 }
 
 
-function App() {
-    const [currentPage, setCurrentPage] = useState('Circles');
-  
-    const handleNavigationClick = (page) => {
-        if (currentPage !== page) {
-            setCurrentPage(page);
-        } else {
-            setCurrentPage('Circles');
-        }
-    };
-  
+export default function App() {
     return (
         <div className="App">
-            <header className="App-header">
-                <nav className="navigation">
-                    <div className="label">
-                        <p>&#127795;   Treemester</p>
-                    </div>
-                    <ul>
-                        <li className={currentPage === 'About the Project' ? 'active' : ''}>
-                            <button onClick={() => handleNavigationClick('About the Project')}>
-                                About the Project
-                            </button>
-                        </li>
-                    </ul>
-                </nav>
-                {currentPage === 'Circles' && (
-                    <div className="circles">
-                        <CirclePacking data={circleTestData} />
-                    </div>
-                )}
-                {currentPage === 'About the Project' && (
-                    <div className="about">
-                        <About />
-                    </div>
-                )}
-            </header>
+        <header className="App-header">
+        <BrowserRouter>
+            <Routes>
+                <Route path='/tinf22b6-treemester' element={<Layout />}>
+                    <Route index element={
+                        <div className="circles">
+                            <CirclePacking data={circleTestData} />
+                        </div>
+                    } />
+                    <Route path='/tinf22b6-treemester/about' element={<About />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+        </header>
         </div>
     );
 }
-  
-export default App;
