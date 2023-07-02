@@ -38,15 +38,12 @@ function Navigation() {
                         <li>
                             Create new Mindmap 
                         </li>
-                        
                         <li>
                             Upload Mindmap
                         </li>
-
                         <li>
                             Create new Sprintline
                         </li>
-                        
                         <li>
                             Upload Sprintline 
                        </li>
