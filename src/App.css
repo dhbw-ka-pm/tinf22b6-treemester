@@ -1,5 +1,6 @@
 .App {
     text-align: center;
+    background-color: #696969;
 }
 
 .App-logo {
@@ -8,7 +9,6 @@
 }
 
 .App-header {
-    background-color: #696969;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -53,9 +53,9 @@ simulating a white line under the button
 
 .navigation {
     width: 100%;
-    height: 80px;
+    height: 85px;
     background-color: black;
-    box-shadow: 5px 5px 5px #454545;
+    box-shadow: 2px 2px 4px #454545;
     position: fixed;
     top: 0;
     left: 0;
@@ -87,23 +87,76 @@ simulating a white line under the button
 .navigation button:focus {
     outline: none;
 } */
-
-.links {
+.start {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
+}
+.start a{
+    margin-left: 15px;
+    color:white;
+    text-decoration: none;
+    margin-right: 15px;
+}
+.links {
+    position: relative;
+    width: 70%;
+    margin: 0;
+    padding: 0; 
+    display: inline;
+    justify-content: space-right;
   }
   
-  .links a {
-    margin-left: 15px;
+ .links a{
+    display: inline-block;
+    text-align: left;
     color: white;
     text-decoration: none;
-    margin-right: 20px;
+    margin-left: 25px;
+    margin-right: 5px;
+  }
+
+  .links a ul{
+    display: none;
+    list-style: none;
+    position: absolute;
+    margin-top: 15px;
+    color: black;
+    background-color: lightgray;
+    border-radius: 0px 0px 8px 8px;
   }
   
+  .links a ul a{
+    display: inline-block;
+    position: absolute;
+    color: black;
+    background-color: lightgray;
+
+  }
+  .links a ul li{
+    padding: 1px 1px;
+    border-radius: 4px;
+    
+   }
+
+   .links a ul li a{
+    text-align: justify;
+    color: red;
+
+   }
+
+  .links a:hover ul{
+    display: block;
+   }
+*/
   .currentPage {
     border-bottom: 2px solid white;
   }
 
+  .blockSatz{
+    text-align: justify;
+    hyphens: auto;
+    margin-left: 15px;
+    margin-right: 20px;
+  }
