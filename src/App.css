@@ -121,23 +121,35 @@ simulating a white line under the button
     display: none;
     list-style: none;
     position: absolute;
-    margin-top: 1px;
+    margin-top: 15px;
     color: black;
-    align-items: center;
     background-color: lightgray;
     border-radius: 0px 0px 8px 8px;
-
   }
   
+  .links a ul a{
+    display: inline-block;
+    position: absolute;
+    color: black;
+    background-color: lightgray;
+
+  }
+  .links a ul li{
+    padding: 1px 1px;
+    border-radius: 4px;
+    
+   }
+
+   .links a ul li a{
+    text-align: justify;
+    color: red;
+
+   }
 
   .links a:hover ul{
-    display: list-item;
+    display: block;
    }
-
-   .links ul li:hover{
-    background-color: lightblue;
-   }
-
+*/
   .currentPage {
     border-bottom: 2px solid white;
   }
