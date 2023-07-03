@@ -12,6 +12,8 @@ function Navigation() {
         // case "circlePacking":
         //     classNameCirclePacking = " ";
         //     break;
+        default:
+            break;
     }
 
     return (
