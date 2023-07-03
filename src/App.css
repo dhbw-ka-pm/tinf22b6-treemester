@@ -90,7 +90,7 @@ simulating a white line under the button
 .start {
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: left;
     justify-content: space-between;
 }
 
@@ -111,47 +111,47 @@ simulating a white line under the button
 }
 
 .links a {
+    height: 40px;
     display: inline-block;
-    text-align: left;
+    text-align: center;
     color: white;
     text-decoration: none;
     margin-left: 25px;
     margin-right: 5px;
+    margin-bottom: 2px;
 }
+
 
 .links a ul {
     display: none;
     list-style: none;
     position: absolute;
-    margin-top: 15px;
+    margin: 0.8px 0px 0px 2px;
+    padding: 0px 0px 0px 0px;
     color: black;
     background-color: lightgray;
     border-radius: 0px 0px 8px 8px;
+    text-align: left;
+
 }
+
 
 .links a ul a {
     display: inline-block;
     position: absolute;
-    color: black;
-    background-color: lightgray;
-}
-.links a ul li {
-    padding: 1px 1px;
-    border-radius: 4px;
 }
 
-.links a ul li a {
-    text-align: justify;
-    color: red;
-}
+
 
 .links a:hover ul {
     display: block;
+
 }
 
 
 .links ul li:hover{
     background-color: lightblue;
+    border-radius: 0px 0px 8px 8px;
 }
 
 .currentPage {
