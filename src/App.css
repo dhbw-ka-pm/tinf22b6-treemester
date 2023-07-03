@@ -149,6 +149,11 @@ simulating a white line under the button
     display: block;
 }
 
+
+.links ul li:hover{
+    background-color: lightblue;
+}
+
 .currentPage {
     border-bottom: 2px solid white;
 }
