@@ -38,19 +38,18 @@ function Navigation() {
                     <span>Edit</span>
                     <ul>
                         <li>
-                          &nbsp;Create new Mindmap&nbsp; 
+                        Create new Mindmap
                         </li>
-                        
                         <li>
-                          &nbsp;Upload Mindmap&nbsp;
+                        Upload Mindmap
                         </li>
 
                         <li>
-                          &nbsp;Create new Sprintline&nbsp;
+                        Create new Sprintline
                         </li>
                         
                         <li>
-                          &nbsp;Upload Sprintline&nbsp; 
+                        Upload Sprintline 
                        </li>
                    </ul>
                 </Link>
@@ -59,16 +58,16 @@ function Navigation() {
                     <span>Settings</span>
                         <ul>
                             <li>
-                            &nbsp;Options&nbsp;
+                            Options
                             </li>
                             <li>
-                            &nbsp;Darkmode&nbsp;
+                            Darkmode
                             </li>
                             <li>
-                            &nbsp;Help&nbsp;
+                            Help
                             </li>
                             <li>
-                            &nbsp;"Logged User"&nbsp;
+                            "Logged User"
                             </li>
                         </ul>
                     </Link>            

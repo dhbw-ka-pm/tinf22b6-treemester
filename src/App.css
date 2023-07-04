@@ -126,19 +126,20 @@ simulating a white line under the button
     display: none;
     list-style: none;
     position: absolute;
-    margin: 0.8px 0px 0px 2px;
+    margin-top: 0.8px;
     padding: 0px 0px 0px 0px;
     color: black;
     background-color: lightgray;
     border-radius: 0px 0px 8px 8px;
-    text-align: left;
+    text-align: justify;
 
 }
 
 
 .links a ul a {
-    display: inline-block;
+    display: inline-flex;
     position: absolute;
+    font-size: 10px;
 }
 
 
