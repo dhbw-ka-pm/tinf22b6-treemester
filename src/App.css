@@ -1,4 +1,6 @@
-html {background-color: #696969}
+html {
+    background-color: #696969
+}
 
 .App {
     text-align: center;
@@ -34,28 +36,49 @@ svg g {
     width: 100vw;
 }
 
-.active {
+.currentPage {
     position: relative;
 }
 
+.about {
+    position: relative;
+}
 
-/*
-The ::after pseudo-element creates a positioned pseudo-element at the bottom of the active <li> element,
-simulating a white line under the button
-*/
-/* .currentPage::after {
+.about::after {
     content: "";
     position: absolute;
     bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    transform: translateX(-50%);
     background-color: white;
-  } */
+    transition: width 0.25s ease-in-out;
+}
+
+.about:hover::after {
+    width: 100%;
+}
+
+.currentPage::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    transform: translateX(-50%);
+    background-color: white;
+    transition: width 0.25s ease-in-out;
+}
+
+.currentPage:hover::after {
+    width: 100%;
+}
 
 .navigation {
     width: 100%;
-    height: 85px;
+    height: 75px;
     background-color: black;
     box-shadow: 2px 2px 4px #454545;
     position: fixed;
@@ -89,6 +112,7 @@ simulating a white line under the button
 .navigation button:focus {
     outline: none;
 } */
+
 .start {
     width: 100%;
     display: flex;
@@ -134,7 +158,6 @@ simulating a white line under the button
     background-color: lightgray;
     border-radius: 0px 0px 8px 8px;
     text-align: justify;
-
 }
 
 
@@ -144,21 +167,14 @@ simulating a white line under the button
     font-size: 10px;
 }
 
-
-
 .links a:hover ul {
     display: block;
-
 }
 
 
 .links ul li:hover{
     background-color: lightblue;
     border-radius: 0px 0px 8px 8px;
-}
-
-.currentPage {
-    border-bottom: 2px solid white;
 }
 
 .blockSatz {
