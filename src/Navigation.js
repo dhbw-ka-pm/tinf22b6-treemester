@@ -6,7 +6,15 @@ import { useNavigate } from "react-router-dom";
 function Navigation() {
     const navigate = useNavigate();
     const [current, setCurrent] = useState("");
-    var classNameAbout = " ";
+    var classNameAbout = "about";
+
+    const toggleCurrent = (curr) => {
+        return current !== curr ? setCurrent(curr) : setCurrent("start");
+    }
+
+    const toggleCurrentLink = (curr, currLink) => {
+        return current !== curr ? currLink : "/tinf22b6-treemester";
+    }
 
     switch (current) {
         case "about":
@@ -26,7 +34,7 @@ function Navigation() {
             </div>
             <div className="links">
 
-                <Link to="/tinf22b6-treemester/about" onClick={() => setCurrent("about")} className={classNameAbout}>
+                <Link to={toggleCurrentLink("about", "/tinf22b6-treemester/about")} onClick={() => toggleCurrent("about")} className={classNameAbout}>
                     <span>About Treemester</span>
                 </Link>
 
