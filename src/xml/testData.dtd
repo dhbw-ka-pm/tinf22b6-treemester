@@ -1,0 +1,8 @@
+<!ELEMENT root (node)>
+<!ELEMENT node (node*)>
+<!ATTLIST node x NMTOKEN #REQUIRED>
+<!ATTLIST node y NMTOKEN #REQUIRED>
+<!ATTLIST node color CDATA #REQUIRED>
+<!ATTLIST node radius NMTOKEN #REQUIRED>
+<!ATTLIST node text CDATA #REQUIRED>
+<!ATTLIST node id ID #REQUIRED>
