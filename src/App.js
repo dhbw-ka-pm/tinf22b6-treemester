@@ -64,9 +64,9 @@ const circleTestData = {
 }
 
 
-export default function App() {
+function App() {
     return (
-        <div className="App">
+        <React.Fragment className="App">
         <header className="App-header">
         <BrowserRouter>
             <Routes>
@@ -81,6 +81,8 @@ export default function App() {
             </Routes>
         </BrowserRouter>
         </header>
-        </div>
+        </React.Fragment>
     );
 }
+
+export default App;
