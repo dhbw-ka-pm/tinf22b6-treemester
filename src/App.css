@@ -36,10 +36,6 @@ svg g {
     width: 100vw;
 }
 
-.currentPage {
-    position: relative;
-}
-
 .about {
     position: relative;
 }
@@ -60,20 +56,19 @@ svg g {
     width: 100%;
 }
 
+.currentPage {
+    position: relative;
+}
+
 .currentPage::after {
     content: "";
     position: absolute;
     bottom: 0;
     left: 50%;
-    width: 0;
+    width: 100%;
     height: 2px;
     transform: translateX(-50%);
     background-color: white;
-    transition: width 0.25s ease-in-out;
-}
-
-.currentPage:hover::after {
-    width: 100%;
 }
 
 .navigation {
@@ -88,30 +83,6 @@ svg g {
     align-items: center;
     justify-content: space-between;
 }
-
-/* .navigation ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-}
-
-.navigation link {
-    margin-right: 10px;
-}
-
-.navigation button {
-    height: 70px;
-    display: block;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: white;
-}
-
-.navigation button:focus {
-    outline: none;
-} */
 
 .start {
     width: 100%;
@@ -147,7 +118,6 @@ svg g {
     margin-right: 10px;
 }
 
-
 .links a ul {
     display: none;
     list-style: none;
@@ -160,7 +130,6 @@ svg g {
     text-align: justify;
 }
 
-
 .links a ul a {
     display: inline-flex;
     position: absolute;
@@ -170,7 +139,6 @@ svg g {
 .links a:hover ul {
     display: block;
 }
-
 
 .links ul li:hover{
     background-color: lightblue;
