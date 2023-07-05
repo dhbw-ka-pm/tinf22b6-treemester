@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import ReactFileReader from 'react-file-reader';
+import { useNavigate } from "react-router-dom";
 
 function Navigation() {
+    const navigate = useNavigate();
     const [current, setCurrent] = useState("");
     var classNameAbout = " ";
 
@@ -9,9 +12,6 @@ function Navigation() {
         case "about":
             classNameAbout = "currentPage";
             break;
-        // case "circlePacking":
-        //     classNameCirclePacking = " ";
-        //     break;
         default:
             break;
     }
@@ -30,50 +30,57 @@ function Navigation() {
                     <span>About Treemester</span>
                 </Link>
 
-                <Link to="/tinf22b6-treemester" onClick={() => setCurrent("circlePacking")}>                    
+                <Link to="/tinf22b6-treemester" onClick={() => setCurrent("circlePacking")}>
                     <span>Login</span>
                 </Link>
-                    
-                <Link to="/tinf22b6-treemester" onClick={() => setCurrent("circlePacking")}>
+
+                <a>
                     <span>Edit</span>
                     <ul>
                         <li>
-                        Create new Mindmap
+                            Create new Mindmap
                         </li>
                         <li>
-                        Upload Mindmap
+                            <ReactFileReader handleFiles={(files) => handleFiles(files)} fileTypes={[".xml"]}>
+                                <>Upload Mindmap</>
+                            </ReactFileReader>
                         </li>
 
                         <li>
-                        Create new Sprintline
+                            Create new Sprintline
                         </li>
-                        
+
                         <li>
-                        Upload Sprintline 
-                       </li>
-                   </ul>
-                </Link>
-                
+                            Upload Sprintline
+                        </li>
+                    </ul>
+                </a>
+
                 <Link to="/tinf22b6-treemester" onClick={() => setCurrent("circlePacking")} >
                     <span>Settings</span>
-                        <ul>
-                            <li>
+                    <ul>
+                        <li>
                             Options
-                            </li>
-                            <li>
+                        </li>
+                        <li>
                             Darkmode
-                            </li>
-                            <li>
+                        </li>
+                        <li>
                             Help
-                            </li>
-                            <li>
+                        </li>
+                        <li>
                             "Logged User"
-                            </li>
-                        </ul>
-                    </Link>            
-                </div>
+                        </li>
+                    </ul>
+                </Link>
+            </div>
         </nav>
     )
+
+    function handleFiles(files) {
+        navigate("/tinf22b6-treemester/view", { state: { file: files[0] } });
+    }
 }
 
 export default Navigation;
+

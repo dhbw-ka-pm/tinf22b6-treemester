@@ -10,6 +10,7 @@ function CirclePackaging(props) {
             svg.selectAll('*').remove();
     
             let g = svg.append('g');
+            g.attr("class", "svgRoot")
     
             let packingLayout = d3.pack()
             .radius(d => {
@@ -17,7 +18,7 @@ function CirclePackaging(props) {
                     // Kleinster Kreis in den alle Children-Kreise reinpassen
                     return d3.packEnclose(d.children).r;
                 } else {
-                    return d.data.value;
+                    return d.data.radius;
                 }
             });
             var root = d3.hierarchy(data, d => d.children);
@@ -28,10 +29,10 @@ function CirclePackaging(props) {
     
             var maxDepth = d3.max(root.descendants(), function(d) { return +d.depth });
     
-            // Farbverlauf der Kreise von außen nach innen
+            // Farbverlauf der Kreise von aussen nach innen
             const color = d3.scaleSequential([maxDepth,0], d3.interpolate('#b9f0e2', '#3b77a8'));
     
-            // Kreise zu allen Nodes hinzufügen
+            // Kreise zu allen Nodes hinzufuegen
             const node = g.selectAll('node')
                 .data(root.descendants())
                 .enter()
@@ -50,8 +51,9 @@ function CirclePackaging(props) {
                         event.stopImmediatePropagation();
                     }
                 });
+
     
-            // Texte zu allen Nodes hinzufügen
+            // Texte zu allen Nodes hinzufuegen
             const label = g.selectAll('node')
             .data(root.descendants())
             .enter()

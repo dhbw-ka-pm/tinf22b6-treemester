@@ -1,4 +1,6 @@
-html {background-color: #696969}
+html {
+    background-color: #696969
+}
 
 .App {
     text-align: center;
@@ -24,14 +26,24 @@ html {background-color: #696969}
     color: #61dafb;
 } */
 
-svg g {
+svg {
+    overflow: visible;
+}
+
+svg text {
+    text-anchor: middle;
+    font-size: 12px;
+    font-weight: 200;
+}
+
+svg g.svgRoot {
     transform: translate(50%, 50%);
 }
 
 .circles {
     font-size: 0.5em;
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
 }
 
 .active {
@@ -98,7 +110,7 @@ simulating a white line under the button
 
 .start a {
     margin-left: 15px;
-    color:white;
+    color: white;
     text-decoration: none;
     margin-right: 15px;
 }
@@ -107,7 +119,7 @@ simulating a white line under the button
     position: relative;
     width: 70%;
     margin: 0;
-    padding: 0; 
+    padding: 0;
     display: inline;
     justify-content: space-right;
 }
@@ -152,7 +164,7 @@ simulating a white line under the button
 }
 
 
-.links ul li:hover{
+.links ul li:hover {
     background-color: lightblue;
     border-radius: 0px 0px 8px 8px;
 }
