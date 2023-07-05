@@ -6,7 +6,7 @@ function About() {
         <>
             <div className="description">
                 <h2>Treemester</h2>
-                <p class = "blockSatz">
+                <p className = "blockSatz">
                 Treemester is a software for students and other people,
                 who are struggling with learning and are in need of better topical guidance.
                 We differ from other software by creating a product that establishes a fun and easy

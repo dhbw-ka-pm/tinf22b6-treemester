@@ -9,52 +9,49 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
+import ViewMindmap from './ViewMindmap';
 
 const circleTestData = {
     "name": "Theoretische Informatik",
-    "value": 60,
     "children": [
         {
             "name": "Sortieralgorithmen",
-            "value": 45,
             "children": [
                 {
                     "name": "Bubble Sort",
-                    "value": 55
+                    "radius": 55
                 },
                 {
                     "name": "Insertion Sort",
-                    "value": 65
+                    "radius": 65
                 },
                 {
                     "name": "Merge Sort",
-                    "value": 50
+                    "radius": 50
                 }
             ]
         },
         {
             "name": "Turingmaschinen",
-            "value": 55
+            "radius": 55
         },
         {
             "name": "Vollst\u00e4ndige Induktion",
-            "value": 30,
             "children": [
                 {
                     "name": "Induktionsanfang",
-                    "value": 50
+                    "radius": 50
                 },
                 {
                     "name": "Induktionsschritt",
-                    "value": 60,
                     "children": [
                         {
                             "name": "Induktionsannahme",
-                            "value": 45
+                            "radius": 45
                         },
                         {
                             "name": "Induktionsbehauptung",
-                            "value": 55
+                            "radius": 55
                         },
                     ]
                 }
@@ -77,6 +74,7 @@ export default function App() {
                         </div>
                     } />
                     <Route path='/tinf22b6-treemester/about' element={<About />} />
+                    <Route path='/tinf22b6-treemester/view' element={<ViewMindmap />} />
                 </Route>
             </Routes>
         </BrowserRouter>
