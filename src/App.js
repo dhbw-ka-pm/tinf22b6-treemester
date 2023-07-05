@@ -63,7 +63,7 @@ const circleTestData = {
 
 function App() {
     return (
-        <React.Fragment className="App">
+        <React.Fragment>
         <header className="App-header">
         <BrowserRouter>
             <Routes>
