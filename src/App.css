@@ -131,9 +131,10 @@ svg g {
     position: relative;
     width: 70%;
     margin: 0;
+    margin-right: 35px;
     padding: 0; 
-    display: inline;
-    justify-content: space-right;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .links a {
@@ -142,9 +143,8 @@ svg g {
     text-align: center;
     color: white;
     text-decoration: none;
-    margin-left: 25px;
-    margin-right: 5px;
-    margin-bottom: 2px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 
