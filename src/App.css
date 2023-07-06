@@ -1,4 +1,7 @@
-html {background-color: #696969}
+body {
+    background-color: #696969;
+    padding-top: 70px;
+}
 
 .App-logo {
     height: 40vmin;
@@ -148,9 +151,8 @@ svg g.svgRoot {
     border-radius: 0px 0px 8px 8px;
 }
 
-.blockSatz {
+.faq{
+    width: 55%;
     text-align: justify;
     hyphens: auto;
-    margin-left: 15px;
-    margin-right: 20px;
 }
