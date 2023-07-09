@@ -1,5 +1,5 @@
 body {
-    background: radial-gradient(#635a5a, #a19b9b );
+    background: radial-gradient(#635a5a, #a19b9b);
     padding-top: 70px;
 }
 
@@ -92,7 +92,6 @@ svg g.svgRoot {
 }
 
 .start {
-    width: 100%;
     display: flex;
     align-items: left;
     justify-content: space-between;
@@ -107,10 +106,10 @@ svg g.svgRoot {
 
 .links {
     position: relative;
-    width: 70%;
     margin: 0;
     margin-right: 35px;
-    padding: 0; 
+    margin-left: 35px;
+    padding: 0;
     display: flex;
     justify-content: flex-end;
 }
@@ -129,12 +128,18 @@ svg g.svgRoot {
     display: none;
     list-style: none;
     position: absolute;
+}
+
+.links a ul,
+.links a ul li button {
     margin-top: 0.8px;
     padding: 0px 0px 0px 0px;
     color: black;
     background-color: lightgray;
     border-radius: 0px 0px 8px 8px;
     text-align: justify;
+    border: none;
+    font: inherit;
 }
 
 .links a ul a {
@@ -147,33 +152,37 @@ svg g.svgRoot {
     display: block;
 }
 
-.links ul li:hover{
+.links ul li:hover,
+.links ul li:hover button {
     background-color: lightblue;
     border-radius: 0px 0px 8px 8px;
 }
 
-.faq{
+.faq {
     width: 55%;
     text-align: justify;
     hyphens: auto;
 }
 
-.faq h1,h3{
+.faq h1,
+h3 {
     color: white;
     text-shadow: 2;
 }
-.faq p{
+
+.faq p {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
     color: white;
 }
 
-.faq p.show{
+.faq p.show {
     max-height: 1000px;
     transition: max-height 0.5s ease-in-out;
-}   
-.downloadButton{
+}
+
+.downloadButton {
     vertical-align: bottom;
     width: 250px;
     height: 70px;
