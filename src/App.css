@@ -133,14 +133,21 @@ svg g.svgRoot {
     position: absolute;
 }
 
-.links a ul,
-.links a ul li button {
+.links a ul {
     margin-top: 0.8px;
     padding: 0px 0px 0px 0px;
     color: black;
     background-color: lightgray;
     border-radius: 0px 0px 8px 8px;
     text-align: left;
+}
+
+.links a ul li button{
+    border: inherit;
+    font: inherit;
+    background: none;
+    padding: inherit;
+    text-align: inherit;
 }
 
 .links a ul a {
@@ -153,8 +160,7 @@ svg g.svgRoot {
     display: block;
 }
 
-.links ul li:hover,
-.links ul li:hover button {
+.links ul li:hover {
     background-color: lightblue;
     border-radius: 0px 0px 8px 8px;
 }
