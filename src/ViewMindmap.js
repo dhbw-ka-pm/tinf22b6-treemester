@@ -98,9 +98,6 @@ function ViewMindmap() {
             }
         });
 
-        console.log(root);
-
-
         d3.selectAll("circle")
             .data(descendants)
             .on('click', (event, d) => {
