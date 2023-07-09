@@ -134,7 +134,7 @@ svg g.svgRoot {
     color: black;
     background-color: lightgray;
     border-radius: 0px 0px 8px 8px;
-    text-align: justify;
+    text-align: left;
 }
 
 .links a ul a {
