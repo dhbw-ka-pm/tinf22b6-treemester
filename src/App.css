@@ -105,6 +105,9 @@ svg g.svgRoot {
 }
 
 .links {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     position: relative;
     margin: 0;
     margin-right: 35px;
@@ -137,9 +140,7 @@ svg g.svgRoot {
     color: black;
     background-color: lightgray;
     border-radius: 0px 0px 8px 8px;
-    text-align: justify;
-    border: none;
-    font: inherit;
+    text-align: left;
 }
 
 .links a ul a {

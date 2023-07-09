@@ -65,7 +65,9 @@ function Navigation() {
                         </li>
 
                         <li>
-                            Upload Sprintline
+                             <ReactFileReader handleFiles={(files) => handleFiles(files)} fileTypes={[".xml"]}>
+                                <>Upload SprintLine</>
+                            </ReactFileReader>
                         </li>
                     </ul>
                 </a>
