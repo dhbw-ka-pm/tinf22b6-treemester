@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 var xslFile = require("./xml/convertToSvg.xsl");
+let rootForDownload = " ";
 
 
 function ViewMindmap() {
@@ -37,9 +38,12 @@ function ViewMindmap() {
         }
     }, [])
     return (
-        <div className="circles">
+        <><div className="circles">
 
         </div>
+        <div className='buttons'>
+            <button className='downloadButton' onClick={() => downloadXML(rootForDownload)}>Download as XML-File</button>
+        </div></>
     );
 
     function convertFile(file) {
@@ -77,6 +81,8 @@ function ViewMindmap() {
         var hierarchy = d3.hierarchy(xmlData, d => d.children)
         
         let root = hierarchy.children[0]
+        rootForDownload = root;
+
         focus = root;
         
         packingLayout(hierarchy);
@@ -91,6 +97,8 @@ function ViewMindmap() {
                 return 1;
             }
         });
+
+        console.log(root);
 
 
         d3.selectAll("circle")
@@ -168,6 +176,38 @@ function ViewMindmap() {
                 return (d.data.attributes.y - v[1]) * k - a
             });
     }
+    function createXML(root) {
+        let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+        xml += '<!DOCTYPE root SYSTEM "testData.dtd">\n';
+        xml += '<?xml-stylesheet href="convertSVG.xsl" type="text/xsl"?>\n';
+        xml += '<root>\n';
+        xml += createNodeXML(root);
+        xml += '</root>\n';
+        return xml;
+      }
+      
+      function createNodeXML(node) {
+        let xml = '';
+        xml += `<node id="${node.data.attributes.id}" x="${node.data.attributes.x}" y="${node.data.attributes.y}" color="${node.data.attributes.color}" radius="${node.data.attributes.radius}" text="${node.data.attributes.text}">\n`;
+        if (node.children) {
+          for (let i = 0; i < node.children.length; i++) {
+            xml += createNodeXML(node.children[i]);
+          }
+        }
+        xml += '</node>\n';
+        return xml;
+      }
+      
+    function downloadXML(root){
+    const xml = createXML(root);
+    const xmlToDownload = new Blob([xml], {type: 'application/xml'});
+    const downloadLink = URL.createObjectURL(xmlToDownload);
+
+    const linkElement = document.createElement('a');
+    linkElement.href = downloadLink;
+    linkElement.download = 'your_circle_packing.xml';
+    linkElement.click();
+}
 }
 
 export default ViewMindmap;
