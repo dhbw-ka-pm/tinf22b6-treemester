@@ -37,6 +37,7 @@ svg g.svgRoot {
 }
 
 .circles {
+    margin-top: 100px;
     font-size: 0.5em;
     height: 100%;
     width: 100%;
@@ -171,5 +172,16 @@ svg g.svgRoot {
 .faq p.show{
     max-height: 1000px;
     transition: max-height 0.5s ease-in-out;
+}   
+.downloadButton{
+    vertical-align: bottom;
+    width: 250px;
+    height: 70px;
+    background-color: black;
+    font-size: 20px;
+    color: white;
+    box-shadow: 2px 2px 4px #454545;
+    margin-top: 250px;
+    border-radius: 10px;
+    vertical-align: auto;
 }
-
