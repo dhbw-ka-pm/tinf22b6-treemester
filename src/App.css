@@ -1,4 +1,7 @@
 body {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     background: radial-gradient(#635a5a, #a19b9b);
     padding-top: 70px;
 }
@@ -104,10 +107,17 @@ svg g.svgRoot {
     margin-right: 15px;
 }
 
+.tools {
+    display: flex;
+    align-items: left;
+    justify-content: flex-end;
+}
+
+.tools a {
+    text-align: center;
+}
+
 .links {
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
     position: relative;
     margin: 0;
     margin-right: 35px;
@@ -131,9 +141,6 @@ svg g.svgRoot {
     display: none;
     list-style: none;
     position: absolute;
-}
-
-.links a ul {
     margin-top: 0.8px;
     padding: 0px 0px 0px 0px;
     color: black;
@@ -148,12 +155,6 @@ svg g.svgRoot {
     background: none;
     padding: inherit;
     text-align: inherit;
-}
-
-.links a ul a {
-    display: inline-flex;
-    position: absolute;
-    font-size: 10px;
 }
 
 .links a:hover ul {
@@ -200,4 +201,41 @@ h3 {
     margin-top: 250px;
     border-radius: 10px;
     vertical-align: auto;
+}
+
+.floating-toolbar-overlay {
+    position: absolute;
+    z-index: 9999;
+    cursor: move;
+  }
+  
+.floating-toolbar-overlay.locked {
+    cursor: default;
+}
+  
+.floating-toolbar {
+    color: black;
+    background-color: rgb(201, 201, 164);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+  
+.toolbar-lock,
+.toolbar-unlock,
+.toolbar-close {
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.toolbar-close{
+    float: right;
+    color: rgb(128, 0, 0);
+}
+  
+.toolbar-lock:hover,
+.toolbar-unlock:hover,
+.toolbar-close:hover {
+    text-decoration: underline;
 }
