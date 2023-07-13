@@ -1,6 +1,6 @@
 import React from 'react';
 import  {useState} from 'react';
-import './App.css';
+import '../css/App.css';
 
 function About() {
     const [showParagraphs, setShowParagraphs] = useState([]);

@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 
-var xslFile = require("./xml/convertToSvg.xsl");
+var xslFile = require("../xml/convertToSvg.xsl");
 let rootForDownload = " ";
 
 

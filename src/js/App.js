@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import '../css/App.css';
 import CirclePacking from './CirclePacking';
 import About from './About';
 import Layout from './Layout';
