@@ -119,7 +119,7 @@ function Navigation({handleToolbarCreateCircle,handleToolbarClose}) {
             </div>
             <div className="links">
                 <Link to={toggleCurrentLink("about", "/tinf22b6-treemester/about")} onClick={() => toggleCurrent("about")} className={classNameAbout}>
-                    <span>About Treemester</span>
+                    <span>About</span>
                 </Link>
 
                 <a>
@@ -144,7 +144,7 @@ function Navigation({handleToolbarCreateCircle,handleToolbarClose}) {
 
                         <li>
                              <ReactFileReader handleFiles={(files) => handleFiles(files)} fileTypes={[".xml"]}>
-                                <>Upload SprintLine</>
+                                <>Upload Sprintline</>
                             </ReactFileReader>
                         </li>
 
@@ -165,9 +165,6 @@ function Navigation({handleToolbarCreateCircle,handleToolbarClose}) {
                         </li>
                         <li>
                             Help
-                        </li>
-                        <li>
-                            "Logged User"
                         </li>
                     </ul>
                 </Link>
