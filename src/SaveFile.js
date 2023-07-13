@@ -26,7 +26,7 @@ function SaveFile(props) {
                         error={fileNameEmpty}
                         defaultValue={defaultValue}
                         onChange={(event) => {
-                            setFileNameEmpty(event.target.value.length == 0)
+                            setFileNameEmpty(event.target.value.length === 0)
                         }}
                         InputProps={{
                             endAdornment: (
