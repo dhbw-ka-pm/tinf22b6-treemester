@@ -1,0 +1,23 @@
+.faq {
+    width: 55%;
+    text-align: justify;
+    hyphens: auto;
+}
+
+.faq h1,
+h3 {
+    color: white;
+    text-shadow: 2;
+}
+
+.faq p {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    color: white;
+}
+
+.faq p.show {
+    max-height: 1000px;
+    transition: max-height 0.5s ease-in-out;
+}

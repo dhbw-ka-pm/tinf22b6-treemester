@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Tools from './Tools';
 import Circle from './Circle';
+import "../css/ToolBar.css"
 
 const ToolBar = () => {
   const [circles, setCircles] = useState([]);
