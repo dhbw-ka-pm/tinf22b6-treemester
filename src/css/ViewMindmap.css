@@ -1,4 +1,4 @@
-.downloadButton {
+.saveFile button {
     vertical-align: bottom;
     width: 250px;
     height: 70px;
@@ -8,5 +8,4 @@
     box-shadow: 2px 2px 4px #454545;
     margin-top: 250px;
     border-radius: 10px;
-    vertical-align: auto;
 }

@@ -7,7 +7,7 @@ function SaveFile(props) {
     const [open, setOpen] = useState(false);
     const [fileNameEmpty, setFileNameEmpty] = useState(false);
 
-    let defaultValue = props.defaultValue ? props.defaultValue : "your_circle_packing"
+    let defaultValue = props.defaultValue ? props.defaultValue : "myMindmap"
 
     return (
         <>
@@ -18,7 +18,7 @@ function SaveFile(props) {
                     <TextField id="fileNameInput"
                         label="File Name"
                         type="text"
-                        placeholder="your_circle_packing"
+                        placeholder={defaultValue}
                         margin="dense"
                         variant="standard"
                         autoFocus

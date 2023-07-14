@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import "../css/ViewMindmap.css"
+import SaveFile from './SaveFile';
 
 var xslFile = require("../xml/convertToSvg.xsl");
 let rootForDownload = " ";
@@ -38,12 +39,17 @@ function ViewMindmap() {
         }
     }, [])
     return (
-        <><div className="circles">
-
-        </div>
-        <div className='buttons'>
-            <button className='downloadButton' onClick={() => downloadXML(rootForDownload)}>Download as XML-File</button>
-        </div></>
+        <>
+            <div className="circles">
+            </div>
+            <div className='saveFile'>
+                <SaveFile
+                    buttonText="Download as XML-File"
+                    onSave={() => downloadXML(rootForDownload)}
+                    defaultValue="myMindmap"
+                />
+            </div>
+        </>
     );
 
     function convertFile(file) {
@@ -76,24 +82,24 @@ function ViewMindmap() {
         xmlData = xmlData.children[0];
 
         let packingLayout = d3.pack()
-        .radius(d => d.data.attributes.radius)
+            .radius(d => d.data.attributes.radius)
 
         var hierarchy = d3.hierarchy(xmlData, d => d.children)
-        
+
         let root = hierarchy.children[0]
         rootForDownload = root;
 
         focus = root;
-        
+
         packingLayout(hierarchy);
-        
+
         var descendants = hierarchy.descendants().slice(1);
 
-        descendants.sort((a,b) => {
-            if(parseInt(a.data.attributes.id.slice(1)) < parseInt(b.data.attributes.id.slice(1))){
+        descendants.sort((a, b) => {
+            if (parseInt(a.data.attributes.id.slice(1)) < parseInt(b.data.attributes.id.slice(1))) {
                 return -1;
             }
-            else{
+            else {
                 return 1;
             }
         });
@@ -110,7 +116,7 @@ function ViewMindmap() {
                     event.stopImmediatePropagation();
                 }
             })
-            
+
 
         d3.selectAll("text")
             .data(descendants)
@@ -181,30 +187,32 @@ function ViewMindmap() {
         xml += createNodeXML(root);
         xml += '</root>\n';
         return xml;
-      }
-      
-      function createNodeXML(node) {
+    }
+
+    function createNodeXML(node) {
         let xml = '';
         xml += `<node id="${node.data.attributes.id}" x="${node.data.attributes.x}" y="${node.data.attributes.y}" color="${node.data.attributes.color}" radius="${node.data.attributes.radius}" text="${node.data.attributes.text}">\n`;
         if (node.children) {
-          for (let i = 0; i < node.children.length; i++) {
-            xml += createNodeXML(node.children[i]);
-          }
+            for (let i = 0; i < node.children.length; i++) {
+                xml += createNodeXML(node.children[i]);
+            }
         }
         xml += '</node>\n';
         return xml;
-      }
-      
-    function downloadXML(root){
-    const xml = createXML(root);
-    const xmlToDownload = new Blob([xml], {type: 'application/xml'});
-    const downloadLink = URL.createObjectURL(xmlToDownload);
+    }
 
-    const linkElement = document.createElement('a');
-    linkElement.href = downloadLink;
-    linkElement.download = 'your_circle_packing.xml';
-    linkElement.click();
-}
+    function downloadXML(root) {
+        const xml = createXML(root);
+        const xmlToDownload = new Blob([xml], { type: 'application/xml' });
+        const downloadLink = URL.createObjectURL(xmlToDownload);
+
+        let fileName = document.getElementById("fileNameInput").value;
+
+        const linkElement = document.createElement('a');
+        linkElement.href = downloadLink;
+        linkElement.download = fileName;
+        linkElement.click();
+    }
 }
 
 export default ViewMindmap;
