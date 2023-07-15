@@ -20,16 +20,6 @@ body {
     color: white;
 }
 
-svg {
-    overflow: visible;
-}
-
-svg text {
-    text-anchor: middle;
-    font-size: 12px;
-    font-weight: 200;
-}
-
 svg g.svgRoot {
     transform: translate(50%, 50%);
 }
