@@ -22,6 +22,14 @@
     margin-right: 15px;
 }
 
+.links button {
+    font: inherit;
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border: inherit;
+}
+
 .links {
     position: relative;
     margin: 0;
@@ -39,7 +47,7 @@
     margin-right: 20px;
     position: relative;
 }
-  
+
 .links a::before {
     content: "";
     position: absolute;
@@ -51,11 +59,11 @@
     transform: scaleX(0);
     transition: transform 0.3s ease-in-out;
 }
-  
+
 .links a:hover::before {
     transform: scaleX(1);
 }
-  
+
 .links a ul {
     display: none;
     list-style: none;
@@ -72,13 +80,13 @@
     opacity: 0;
     pointer-events: none;
 }
-  
+
 .links a:hover ul {
     display: block;
     opacity: 1;
     pointer-events: auto;
 }
-  
+
 .links ul li {
     padding: 4px 16px;
     font-size: 18px;
@@ -86,7 +94,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-  
+
 .links ul li:hover {
     background-color: rgba(255, 255, 255, 0.1);
 }
@@ -96,11 +104,11 @@
     z-index: 9999;
     cursor: move;
 }
-  
+
 .floating-toolbar-overlay.locked {
     cursor: default;
 }
-  
+
 .floating-toolbar {
     color: black;
     background-color: rgb(201, 201, 164);
@@ -109,7 +117,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     position: relative;
 }
-  
+
 .toolbar-lock,
 .toolbar-unlock,
 .toolbar-close {
@@ -117,11 +125,11 @@
     margin-top: 10px;
 }
 
-.toolbar-close{
+.toolbar-close {
     float: right;
     color: rgb(128, 0, 0);
 }
-  
+
 .toolbar-lock:hover,
 .toolbar-unlock:hover,
 .toolbar-close:hover {

@@ -3,8 +3,9 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import "../css/ViewMindmap.css"
+import SaveFile from './SaveFile';
 
-var xslFile = require("../xml/convertToSvg.xsl");
+var xslFile = require("../xml/transformMindmap.xsl");
 let rootForDownload = " ";
 
 
@@ -38,12 +39,17 @@ function ViewMindmap() {
         }
     }, [])
     return (
-        <><div className="circles">
-
-        </div>
-        <div className='buttons'>
-            <button className='downloadButton' onClick={() => downloadXML(rootForDownload)}>Download as XML-File</button>
-        </div></>
+        <>
+            <div className="circles">
+            </div>
+            <div className='saveFile'>
+                <SaveFile
+                    buttonText="Download as XML-File"
+                    onSave={() => downloadXML(rootForDownload)}
+                    defaultValue="myMindmap"
+                />
+            </div>
+        </>
     );
 
     function convertFile(file) {
@@ -76,24 +82,24 @@ function ViewMindmap() {
         xmlData = xmlData.children[0];
 
         let packingLayout = d3.pack()
-        .radius(d => d.data.attributes.radius)
+            .radius(d => d.data.attributes.radius)
 
         var hierarchy = d3.hierarchy(xmlData, d => d.children)
-        
+
         let root = hierarchy.children[0]
         rootForDownload = root;
 
         focus = root;
-        
+
         packingLayout(hierarchy);
-        
+
         var descendants = hierarchy.descendants().slice(1);
 
-        descendants.sort((a,b) => {
-            if(parseInt(a.data.attributes.id.slice(1)) < parseInt(b.data.attributes.id.slice(1))){
+        descendants.sort((a, b) => {
+            if (parseInt(a.data.attributes.id.slice(1)) < parseInt(b.data.attributes.id.slice(1))) {
                 return -1;
             }
-            else{
+            else {
                 return 1;
             }
         });
@@ -110,18 +116,10 @@ function ViewMindmap() {
                     event.stopImmediatePropagation();
                 }
             })
-            
+
 
         d3.selectAll("text")
             .data(descendants)
-            .style('fill-opacity', d => d.parent === focus || d === focus ? 1 : 0)
-            .style('display', d => d.parent === focus || d === focus ? 'inline' : 'none')
-            .style('font-size', d => d === focus ? '18px' : '12px')
-            .style('font-weight', d => d === focus ? '600' : '200')
-
-
-        zoomTo([root.x, root.y, root.r * 2], headerOffset, 0);
-
 
     }
 
@@ -139,16 +137,14 @@ function ViewMindmap() {
                 return t => zoomTo(i(t), textIn(t), textOut(t));
             });
 
-        //packingLayout(root);
-
         d3.selectAll("text")
-            .filter(function (d) { return d.parent === focus || d === focus || this.style.display === 'inline' })
+            .filter(function (d) { return d.parent === focus || d === focus || this.getAttribute("display") === 'inline' })
             .transition(transition)
-            .style('fill-opacity', d => d.parent === focus || d === focus ? 1 : 0)
-            .style('font-size', d => d === focus ? '18px' : '12px')
-            .style('font-weight', d => d === focus ? '600' : '200')
-            .on('start', function (d) { if (d.parent === focus || d === focus) this.style.display = 'inline' })
-            .on('end', function (d) { if (d.parent !== focus && d !== focus) this.style.display = 'none' });
+            .attr('fill-opacity', d => d.parent === focus || d === focus ? 1 : 0)
+            .attr('font-size', d => d === focus ? '18px' : '12px')
+            .attr('font-weight', d => d === focus ? '600' : '200')
+            .on('start', function (d) { if (d.parent === focus || d === focus) this.setAttribute("display", "inline") })
+            .on('end', function (d) { if (d.parent !== focus && d !== focus) this.setAttribute("display", "none") });
     }
 
     function zoomTo(v, textIn, textOut) {
@@ -175,36 +171,38 @@ function ViewMindmap() {
     }
     function createXML(root) {
         let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-        xml += '<!DOCTYPE root SYSTEM "testData.dtd">\n';
-        xml += '<?xml-stylesheet href="convertSVG.xsl" type="text/xsl"?>\n';
+        xml += '<!DOCTYPE root SYSTEM "mindmapData.dtd">\n';
+        xml += '<?xml-stylesheet href="transformMindmap.xsl" type="text/xsl"?>\n';
         xml += '<root>\n';
         xml += createNodeXML(root);
         xml += '</root>\n';
         return xml;
-      }
-      
-      function createNodeXML(node) {
+    }
+
+    function createNodeXML(node) {
         let xml = '';
         xml += `<node id="${node.data.attributes.id}" x="${node.data.attributes.x}" y="${node.data.attributes.y}" color="${node.data.attributes.color}" radius="${node.data.attributes.radius}" text="${node.data.attributes.text}">\n`;
         if (node.children) {
-          for (let i = 0; i < node.children.length; i++) {
-            xml += createNodeXML(node.children[i]);
-          }
+            for (let i = 0; i < node.children.length; i++) {
+                xml += createNodeXML(node.children[i]);
+            }
         }
         xml += '</node>\n';
         return xml;
-      }
-      
-    function downloadXML(root){
-    const xml = createXML(root);
-    const xmlToDownload = new Blob([xml], {type: 'application/xml'});
-    const downloadLink = URL.createObjectURL(xmlToDownload);
+    }
 
-    const linkElement = document.createElement('a');
-    linkElement.href = downloadLink;
-    linkElement.download = 'your_circle_packing.xml';
-    linkElement.click();
-}
+    function downloadXML(root) {
+        const xml = createXML(root);
+        const xmlToDownload = new Blob([xml], { type: 'application/xml' });
+        const downloadLink = URL.createObjectURL(xmlToDownload);
+
+        let fileName = document.getElementById("fileNameInput").value;
+
+        const linkElement = document.createElement('a');
+        linkElement.href = downloadLink;
+        linkElement.download = fileName;
+        linkElement.click();
+    }
 }
 
 export default ViewMindmap;
