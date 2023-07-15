@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import '../css/App.css';
 import CirclePacking from './CirclePacking';
 import About from './About';
@@ -10,6 +10,7 @@ import {
     Route,
 } from "react-router-dom";
 import ViewMindmap from './ViewMindmap';
+
 
 const circleTestData = {
     "name": "Theoretische Informatik",
@@ -60,26 +61,26 @@ const circleTestData = {
     ]
 }
 
-function App() {
-    return (
-        <React.Fragment>
-        <header className="App-header">
-        <BrowserRouter>
-            <Routes>
-                <Route path='/tinf22b6-treemester' element={<Layout />}>
+    function App() {
+        return (
+          <React.Fragment>
+            <header className="App-header">
+              <BrowserRouter>
+                <Routes>
+                  <Route path='/tinf22b6-treemester' element={<Layout />}>
                     <Route index element={
-                        <div className="circles">
-                           <CirclePacking data={circleTestData} />
-                        </div>
+                        <div className="circles"> 
+                          <CirclePacking data={circleTestData} />
+                        </div>       
                     } />
                     <Route path='/tinf22b6-treemester/about' element={<About />} />
                     <Route path='/tinf22b6-treemester/view' element={<ViewMindmap />} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
-        </header>
-        </React.Fragment>
-    );
-}
-
-export default App;
+                  </Route>
+                </Routes>
+              </BrowserRouter>
+            </header>
+          </React.Fragment>
+        );
+      }
+      
+      export default App;

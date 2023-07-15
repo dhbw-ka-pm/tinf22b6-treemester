@@ -1,8 +1,9 @@
 import * as d3 from 'd3';
-import React, { useEffect } from 'react';
+import React, { useEffect} from 'react';
 
-function CirclePackaging(props) {
+function CirclePacking(props) {
     const data = props.data;
+    const isSelected = false;
 
     useEffect(() => {
         const draw = () => {
@@ -31,7 +32,6 @@ function CirclePackaging(props) {
     
             // Farbverlauf der Kreise von aussen nach innen
             const color = d3.scaleSequential([maxDepth,0], d3.interpolate('#b9f0e2', '#3b77a8'));
-    
             // Kreise zu allen Nodes hinzufuegen
             const node = g.selectAll('node')
                 .data(root.descendants())
@@ -40,8 +40,9 @@ function CirclePackaging(props) {
                 .attr('r', d => d.r)
                 .attr('cx', d => d.x)
                 .attr('cy', d => d.y)
+                .attr('id', (d, i) => i)
                 .style('fill', d => d.children ? color(d.depth) : 'white')
-                .on('click', (event, d) => {
+                .on('dblclick', (event, d) => {
                     let v = d.children ? d : d.parent;
                     if (focus !== v) {
                         zoom(event, v);
@@ -50,17 +51,28 @@ function CirclePackaging(props) {
                         zoom(event, root);
                         event.stopImmediatePropagation();
                     }
+                })
+                .on('click', function(d,i) {
+                    if (this.isSelected) {
+                        d3.select(this).attr("stroke", "none");
+                        this.isSelected = false;
+                    } else {
+                        d3.select(this).attr("stroke", "#000");
+                        this.isSelected = true;
+                        console.log("Selected Node ID:", d);
+                    }
                 });
-
     
             // Texte zu allen Nodes hinzufuegen
-            const label = g.selectAll('node')
+            const label = g.selectAll('label')
             .data(root.descendants())
             .enter()
             .append('text')
             .attr('x', d => d.x)
             .attr('y', d => d.y)
             .style('text-anchor', 'middle')
+            .style('background-color', d => d === focus ? 'white' : 'none')
+            .style('border', d => d === focus ? '1px solid black' : 'none')
             .style('fill-opacity', d => d.parent === focus || d === focus ? 1 : 0)
             .style('display', d => d.parent === focus || d === focus ? 'inline' : 'none')
             .style('font-size', d => d === focus ? '18px' : '12px')
@@ -119,6 +131,7 @@ function CirclePackaging(props) {
                 .on('start', function(d) { if (d.parent === focus || d === focus) this.style.display = 'inline' })
                 .on('end', function(d) { if (d.parent !== focus && d !== focus) this.style.display = 'none' });
             }
+
         }
 
         draw();
@@ -129,4 +142,4 @@ function CirclePackaging(props) {
     );
 }
 
-export default CirclePackaging;
+export default CirclePacking;
