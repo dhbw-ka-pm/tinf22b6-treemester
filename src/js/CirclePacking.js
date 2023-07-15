@@ -52,16 +52,25 @@ function CirclePacking(props) {
                         event.stopImmediatePropagation();
                     }
                 })
-                .on('click', function(d,i) {
-                    if (this.isSelected) {
-                        d3.select(this).attr("stroke", "none");
-                        this.isSelected = false;
+                .on('click', function(d, i) {
+                    var self = this;
+                    if (!this.clickTimeout) {
+                      this.clickTimeout = setTimeout(function() {
+                        if (self.isSelected) {
+                          d3.select(self).attr("stroke", "none");
+                          self.isSelected = false;
+                        } else {
+                          d3.select(self).attr("stroke", "#000");
+                          self.isSelected = true;
+                          console.log("Selected Node ID:", d);
+                        }
+                        self.clickTimeout = null; 
+                      }, 200); 
                     } else {
-                        d3.select(this).attr("stroke", "#000");
-                        this.isSelected = true;
-                        console.log("Selected Node ID:", d);
+                      clearTimeout(this.clickTimeout); 
+                      this.clickTimeout = null;
                     }
-                });
+                  });
     
             // Texte zu allen Nodes hinzufuegen
             const label = g.selectAll('label')
