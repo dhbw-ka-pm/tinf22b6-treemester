@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/2000/svg">
-    <xsl:output method="xml" doctype-system="testData.dtd"></xsl:output>
+    <xsl:output method="xml" doctype-system="mindmapData.dtd"></xsl:output>
     
     <xsl:template match="root">
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" id="svgFrame" overflow="visible">

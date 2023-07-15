@@ -82,8 +82,8 @@ function Navigation({handleToolbarCreateCircle,handleToolbarClose}) {
 
     function createFile() {
         const root = xmlbuilder.create('root', { version: '1.0', encoding: 'UTF-8' });
-        root.dtd('testData.dtd');
-        root.instructionBefore('xml-stylesheet', 'href="convertSVG.xsl" type="text/xsl"');
+        root.dtd('mindmapData.dtd');
+        root.instructionBefore('xml-stylesheet', 'href="transformMindmap.xsl" type="text/xsl"');
 
         let fileName = document.getElementById("fileNameInput").value;
 

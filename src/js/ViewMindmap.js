@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "../css/ViewMindmap.css"
 import SaveFile from './SaveFile';
 
-var xslFile = require("../xml/convertToSvg.xsl");
+var xslFile = require("../xml/transformMindmap.xsl");
 let rootForDownload = " ";
 
 
@@ -171,8 +171,8 @@ function ViewMindmap() {
     }
     function createXML(root) {
         let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
-        xml += '<!DOCTYPE root SYSTEM "testData.dtd">\n';
-        xml += '<?xml-stylesheet href="convertSVG.xsl" type="text/xsl"?>\n';
+        xml += '<!DOCTYPE root SYSTEM "mindmapData.dtd">\n';
+        xml += '<?xml-stylesheet href="transformMindmap.xsl" type="text/xsl"?>\n';
         xml += '<root>\n';
         xml += createNodeXML(root);
         xml += '</root>\n';

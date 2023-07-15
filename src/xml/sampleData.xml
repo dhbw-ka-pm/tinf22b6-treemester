@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE root SYSTEM "testData.dtd">
-<?xml-stylesheet href="convertSVG.xsl" type="text/xsl"?>
+<!DOCTYPE root SYSTEM "mindmapData.dtd">
+<?xml-stylesheet href="transformMindmap.xsl" type="text/xsl"?>
 <root>
     <node id="N1" x="0" y="0" color="rgb(59, 119, 168)" radius="273.278" text="Theoretische Informatik">
         <node id="N2" x="-99.1991" y="-112.515" color="rgb(101, 159, 187)" radius="123.278"
