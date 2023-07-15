@@ -3,7 +3,7 @@ body {
     -ms-user-select: none;
     user-select: none;
     background: radial-gradient(#635a5a, #a19b9b);
-    padding-top: 70px;
+    padding-top: 75px;
 }
 
 .App-logo {
@@ -12,7 +12,6 @@ body {
 }
 
 .App-header {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,9 +35,8 @@ svg g.svgRoot {
 }
 
 .circles {
-    margin-top: 100px;
     font-size: 0.5em;
-    height: 100%;
+    height: 80vh;
     width: 100%;
 }
 
