@@ -62,7 +62,6 @@ function CirclePacking(props) {
                         } else {
                           d3.select(self).attr("stroke", "#000");
                           self.isSelected = true;
-                          console.log("Selected Node ID:", d);
                         }
                         self.clickTimeout = null; 
                       }, 200); 
