@@ -14,10 +14,10 @@ const Tools = () => {
     setText(e.target.value);
   };
 
-  let circleTestData = {
+  var circleTestData = {
     "name": "Theoretische Informatik",
     "children": [
-        {
+        {   
             "name": "Sortieralgorithmen",
             "children": [
                 {
@@ -62,15 +62,18 @@ const Tools = () => {
         }
     ]
 }
+  
   const handleAddCircle = (newCircle) => {
     var selectedName = findOutName();
     if(selectedName === null){
       console.log("Kein Circle gefunden");
       return;
     }
+    console.log(selectedName);
+
     addCircleToTestData(circleTestData,selectedName,newCircle);
     console.log(circleTestData);
-
+    selectedName = null;
   }
 
   
