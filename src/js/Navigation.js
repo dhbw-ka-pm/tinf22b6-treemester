@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import ReactFileReader from 'react-file-reader';
 import { useNavigate } from "react-router-dom";
@@ -8,17 +8,12 @@ import Tools from "./Tools";
 import "../css/Navigation.css"
 import { ReactSVG } from "react-svg";
 
-function Navigation({handleToolbarCreateCircle,handleToolbarClose}) {
-    
+function Navigation({handleToolbarCreateCircle, handleToolbarClose}) {
     const navigate = useNavigate();
     const [current, setCurrent] = useState("");
     var classNameAbout = "about";
 
-    const [showFloatingToolbar, setShowFloatingToolbar] = useState(false);
-    const [toolbarPosition, setToolbarPosition] = useState({ top: 100, left: 100 });
-    const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-    const [isDragging, setIsDragging] = useState(false);
-    const [isLocked, setIsLocked] = useState(false);
+    const [showToolbar, setShowToolbar] = useState(false);
 
     const toggleCurrent = (curr) => {
         return current !== curr ? setCurrent(curr) : setCurrent("start");
@@ -28,42 +23,8 @@ function Navigation({handleToolbarCreateCircle,handleToolbarClose}) {
         return current !== curr ? currLink : "/tinf22b6-treemester";
     }
 
-    const handleFloatingToolbarToggle = () => {
-        setShowFloatingToolbar(!showFloatingToolbar);
-    };
-
-    const handleCloseToolbar = () => {
-        setShowFloatingToolbar(false);
-      };
-    
-    const handleMouseDown = (e) => {
-    const { clientX, clientY } = e;
-    const offsetX = clientX - toolbarPosition.left;
-    const offsetY = clientY - toolbarPosition.top;
-    setDragOffset({ x: offsetX, y: offsetY });
-    setIsDragging(true);
-    };
-
-    useEffect(() => {
-        const handleMouseMove = (e) => {
-          if (isLocked || !isDragging) return;
-          const { clientX, clientY } = e;
-          const newLeft = clientX - dragOffset.x;
-          const newTop = clientY - dragOffset.y;
-          setToolbarPosition({ left: newLeft, top: newTop });
-        };
-    
-        document.addEventListener("mousemove", handleMouseMove);
-        document.addEventListener("mouseup", handleMouseUp);
-    
-        return () => {
-          document.removeEventListener("mousemove", handleMouseMove);
-          document.removeEventListener("mouseup", handleMouseUp);
-        };
-      }, [isLocked, isDragging, dragOffset]);
-    
-    const handleMouseUp = () => {
-        setIsDragging(false);
+    const handleShowToolbar = () => {
+        setShowToolbar(!showToolbar);
     };
 
     switch (current) {
@@ -73,9 +34,7 @@ function Navigation({handleToolbarCreateCircle,handleToolbarClose}) {
         default:
             break;
     }
-
-
-            
+    
     function handleFiles(files) {
         navigate("/tinf22b6-treemester/view", { state: { file: files[0] } });
     }
@@ -149,8 +108,8 @@ function Navigation({handleToolbarCreateCircle,handleToolbarClose}) {
                             </ReactFileReader>
                         </li>
 
-                        <li onClick={handleFloatingToolbarToggle}>
-                            Show ToolBar
+                        <li onClick={handleShowToolbar}>
+                            Show Toolbar
                         </li>
                     </ul>
                 </a>
@@ -171,35 +130,13 @@ function Navigation({handleToolbarCreateCircle,handleToolbarClose}) {
                 </Link>
             </div>
         </nav>
-              
-        {showFloatingToolbar && (
-        <div
-          className={`floating-toolbar-overlay${isLocked ? " locked" : ""}`}
-          onMouseDown={handleMouseDown}
-          style={{ top: toolbarPosition.top, left: toolbarPosition.left }}
-        >
-          <div className="floating-toolbar">
-            <span className="toolbar-close" onClick={handleCloseToolbar}>
-                Close                
-            </span>
-            <br/>
-            <div>                
-            {!isLocked && (
-              <span className="toolbar-lock" onClick={() => setIsLocked(true)}>
-                Lock 
-              </span>
-            )}
-            {isLocked && (
-              <span className="toolbar-unlock" onClick={() => setIsLocked(false)}>
-                Unlock
-              </span>
-            )}
-            </div>
 
-            <Tools createCircle={handleToolbarCreateCircle} onClose={handleCloseToolbar} />
-          
-          </div>
-        </div>
+        {showToolbar && (
+        <nav className="toolbar">
+            <div className="content-wrapper">
+                <Tools />
+            </div>
+        </nav>
         )}
     </>
    ); 

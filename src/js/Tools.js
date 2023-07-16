@@ -37,7 +37,7 @@ const Tools = () => {
 
 
   return (
-    <div>
+    <>
       <p>
         <label>
           Size: &nbsp;
@@ -51,7 +51,7 @@ const Tools = () => {
         </label>
       </p>
       <button onClick={handleCreateCircle}>Create Circle</button>
-    </div>
+    </>
   );
 };
 
