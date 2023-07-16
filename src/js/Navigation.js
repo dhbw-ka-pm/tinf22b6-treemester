@@ -4,7 +4,7 @@ import ReactFileReader from 'react-file-reader';
 import { useNavigate } from "react-router-dom";
 import xmlbuilder from 'xmlbuilder';
 import SaveFile from "./SaveFile";
-import ToolBar from "./ToolBar";
+import Tools from "./Tools";
 import "../css/Navigation.css"
 import { ReactSVG } from "react-svg";
 
@@ -196,7 +196,7 @@ function Navigation({handleToolbarCreateCircle,handleToolbarClose}) {
             )}
             </div>
 
-            <ToolBar createCircle={handleToolbarCreateCircle} onClose={handleCloseToolbar} />
+            <Tools createCircle={handleToolbarCreateCircle} onClose={handleCloseToolbar} />
           
           </div>
         </div>
