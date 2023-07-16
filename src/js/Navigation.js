@@ -4,7 +4,7 @@ import ReactFileReader from 'react-file-reader';
 import { useNavigate } from "react-router-dom";
 import xmlbuilder from 'xmlbuilder';
 import SaveFile from "./SaveFile";
-import ToolBar from "./Toolbar";
+import ToolBar from "./ToolBar";
 import "../css/Navigation.css"
 import { ReactSVG } from "react-svg";
 
