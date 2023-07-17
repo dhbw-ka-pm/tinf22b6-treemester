@@ -2,7 +2,7 @@ import { Outlet } from "react-router";
 import Navigation from "./Navigation";
 
 function Layout() {
-    return(
+    return (
         <>
             <Navigation />
             <Outlet />

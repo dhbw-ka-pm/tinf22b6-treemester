@@ -8,7 +8,6 @@ import SaveFile from './SaveFile';
 var xslFile = require("../xml/transformMindmap.xsl");
 let rootForDownload = " ";
 
-
 function ViewMindmap() {
     const navigate = useNavigate();
     const { state } = useLocation();

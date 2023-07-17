@@ -1,9 +1,7 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
 
-
 function SaveFile(props) {
-
     const [open, setOpen] = useState(false);
     const [fileNameEmpty, setFileNameEmpty] = useState(false);
 

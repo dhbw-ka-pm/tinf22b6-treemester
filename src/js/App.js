@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React from 'react';
 import '../css/App.css';
 import CirclePacking from './CirclePacking';
 import About from './About';
@@ -61,26 +61,26 @@ const circleTestData = {
     ]
 }
 
-    function App() {
-        return (
-          <React.Fragment>
+function App() {
+    return (
+        <React.Fragment>
             <header className="App-header">
-              <BrowserRouter>
-                <Routes>
-                  <Route path='/tinf22b6-treemester' element={<Layout />}>
-                    <Route index element={
-                        <div className="circles"> 
-                          <CirclePacking data={circleTestData} />
-                        </div>       
-                    } />
-                    <Route path='/tinf22b6-treemester/about' element={<About />} />
-                    <Route path='/tinf22b6-treemester/view' element={<ViewMindmap />} />
-                  </Route>
-                </Routes>
-              </BrowserRouter>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path='/tinf22b6-treemester' element={<Layout />}>
+                            <Route index element={
+                                <div className="circles">
+                                    <CirclePacking data={circleTestData} />
+                                </div>
+                            } />
+                            <Route path='/tinf22b6-treemester/about' element={<About />} />
+                            <Route path='/tinf22b6-treemester/view' element={<ViewMindmap />} />
+                        </Route>
+                    </Routes>
+                </BrowserRouter>
             </header>
-          </React.Fragment>
-        );
-      }
-      
-      export default App;
+        </React.Fragment>
+    );
+}
+
+export default App;
