@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../css/App.css';
 import CirclePacking from './CirclePacking';
 import About from './About';
 import Layout from './Layout';
+import Tools from './Tools';
 
 import {
     BrowserRouter,
@@ -11,8 +12,7 @@ import {
 } from "react-router-dom";
 import ViewMindmap from './ViewMindmap';
 
-
-const circleTestData = {
+var intialCircleData = ({
     "name": "Theoretische Informatik",
     "children": [
         {
@@ -37,7 +37,7 @@ const circleTestData = {
             "radius": 55
         },
         {
-            "name": "Vollst\u00e4ndige Induktion",
+            "name": "Vollständige Induktion",
             "children": [
                 {
                     "name": "Induktionsanfang",
@@ -59,9 +59,16 @@ const circleTestData = {
             ]
         }
     ]
-}
+});
 
 function App() {
+    var [circleData, setCircleData] = useState(intialCircleData);
+    
+    // Function to update the circle data
+    const updateCircleData = (newData) => {
+        setCircleData(newData);
+    };
+
     return (
         <React.Fragment>
             <header className="App-header">
@@ -70,7 +77,12 @@ function App() {
                         <Route path='/tinf22b6-treemester' element={<Layout />}>
                             <Route index element={
                                 <div className="circles">
-                                    <CirclePacking data={circleTestData} />
+                                    <nav className="toolbar">
+                                        <div className="content-wrapper">
+                                            <Tools circleData={circleData} updateCircleData={updateCircleData}/>
+                                        </div>
+                                    </nav>
+                                    <CirclePacking data={circleData} />
                                 </div>
                             } />
                             <Route path='/tinf22b6-treemester/about' element={<About />} />

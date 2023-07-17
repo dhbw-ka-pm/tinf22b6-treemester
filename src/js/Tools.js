@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import * as d3 from 'd3';
-import Navigation from './Navigation';
 
-const Tools = () => {
+const Tools = ({ circleData, updateCircleData }) => {
     const [size, setSize] = useState(50);
     const [text, setText] = useState('');
 
@@ -15,66 +14,21 @@ const Tools = () => {
         setText(e.target.value);
     };
 
-    var circleTestData = {
-        "name": "Theoretische Informatik",
-        "children": [
-            {
-                "name": "Sortieralgorithmen",
-                "children": [
-                    {
-                        "name": "Bubble Sort",
-                        "radius": 55
-                    },
-                    {
-                        "name": "Insertion Sort",
-                        "radius": 65
-                    },
-                    {
-                        "name": "Merge Sort",
-                        "radius": 50
-                    }
-                ]
-            },
-            {
-                "name": "Turingmaschinen",
-                "radius": 55
-            },
-            {
-                "name": "Vollst\u00e4ndige Induktion",
-                "children": [
-                    {
-                        "name": "Induktionsanfang",
-                        "radius": 50
-                    },
-                    {
-                        "name": "Induktionsschritt",
-                        "children": [
-                            {
-                                "name": "Induktionsannahme",
-                                "radius": 45
-                            },
-                            {
-                                "name": "Induktionsbehauptung",
-                                "radius": 55
-                            },
-                        ]
-                    }
-                ]
-            }
-        ]
-    }
-
-    const handleAddCircle = (newCircle) => {
+    const handleAddCircle = () => {
         var selectedName = findOutName();
         if (selectedName === null) {
             console.log("Kein Circle gefunden");
             return;
         }
-        console.log(selectedName);
 
-        addCircleToTestData(circleTestData, selectedName, newCircle);
-        console.log(circleTestData);
-        selectedName = null;
+        const newCircle = {
+            "name": text,
+            "radius": size,
+            "children": []
+        };
+        
+        const updatedData = addCircleToTestData(circleData, selectedName, newCircle);
+        updateCircleData(updatedData);
     }
 
 
@@ -102,14 +56,6 @@ const Tools = () => {
 
     }
 
-    const handleCreateCircle = () => {
-        var newCircle = {
-            "name": text,
-            "radius": size,
-            "children": []
-        };
-        handleAddCircle(newCircle);
-    };
 
     const handleSizeKeyPress = (event) => {
         const charCode = event.which ? event.which : event.keyCode;
@@ -132,7 +78,7 @@ const Tools = () => {
                     <input type="text" value={text} onChange={handleTextChange} />
                 </label>
             </p>
-            <button onClick={handleCreateCircle}>Create Circle</button>
+            <button onClick={handleAddCircle}>Create Circle</button>
         </>
     );
 };
