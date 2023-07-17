@@ -5,8 +5,12 @@ import { useNavigate } from "react-router-dom";
 import "../css/ViewMindmap.css"
 import SaveFile from './SaveFile';
 
+var XMLParser = require('react-xml-parser');
+
 var xslFile = require("../xml/transformMindmap.xsl");
 let rootForDownload = " ";
+
+var xml_doc;
 
 function ViewMindmap() {
     const navigate = useNavigate();
@@ -34,7 +38,6 @@ function ViewMindmap() {
                     convertFile(file);
                 })
 
-
         }
     }, [])
     return (
@@ -54,15 +57,20 @@ function ViewMindmap() {
     function convertFile(file) {
         var reader = new FileReader();
         reader.onload = function () {
-            let processor = new XSLTProcessor();
             var parser = new DOMParser();
-            var xsl_doc = parser.parseFromString(xsl, "text/xml");
-            var xml_doc = parser.parseFromString(reader.result, "text/xml");
-            processor.importStylesheet(xsl_doc);
-            let res = processor.transformToDocument(xml_doc, document);
-            renderSVG(res.documentElement, reader.result);
+            xml_doc = parser.parseFromString(reader.result, "text/xml");
+            transformXML(xml_doc)
         }
         reader.readAsText(file);
+    }
+
+    function transformXML(xml) {
+        var parser = new DOMParser();
+        let processor = new XSLTProcessor();
+        var xsl_doc = parser.parseFromString(xsl, "text/xml");
+        processor.importStylesheet(xsl_doc);
+        let res = processor.transformToDocument(xml, document);
+        renderSVG(res.documentElement, new XMLSerializer().serializeToString(xml))
     }
 
     function renderSVG(element, xml) {
@@ -70,29 +78,25 @@ function ViewMindmap() {
         document.getElementsByClassName("circles")[0].appendChild(element);
         svg = d3.select("svg");
         width = svg.node().getBBox().width;
-
-        addData(xml);
+        var xmlData = new XMLParser().parseFromString(xml);
+        xmlData = xmlData.children[0].children[0];
+        addData(xmlData);
     }
 
-    function addData(xml) {
-
-        var XMLParser = require('react-xml-parser');
-        var xmlData = new XMLParser().parseFromString(xml);
-        xmlData = xmlData.children[0];
+    function addData(xmlData) {
 
         let packingLayout = d3.pack()
             .radius(d => d.data.attributes.radius)
 
-        var hierarchy = d3.hierarchy(xmlData, d => d.children)
+        var root = d3.hierarchy(xmlData, d => d.children)
 
-        let root = hierarchy.children[0]
         rootForDownload = root;
 
         focus = root;
 
-        packingLayout(hierarchy);
+        packingLayout(root);
 
-        var descendants = hierarchy.descendants().slice(1);
+        var descendants = root.descendants();
 
         descendants.sort((a, b) => {
             if (parseInt(a.data.attributes.id.slice(1)) < parseInt(b.data.attributes.id.slice(1))) {
