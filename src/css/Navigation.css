@@ -110,6 +110,12 @@
     font-size: 20px;
 }
 
+.closeToolbar {
+    position: absolute;
+    top: 0; 
+    right: 0;
+}
+
 .content-wrapper {
     display: flex;
     align-items: center;

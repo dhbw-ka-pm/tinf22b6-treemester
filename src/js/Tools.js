@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import * as d3 from 'd3';
+import Navigation from './Navigation';
 
 const Tools = () => {
     const [size, setSize] = useState(50);

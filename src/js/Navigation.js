@@ -134,6 +134,7 @@ function Navigation({handleToolbarCreateCircle, handleToolbarClose}) {
         {showToolbar && (
         <nav className="toolbar">
             <div className="content-wrapper">
+            <button className="closeToolbar" onClick={handleShowToolbar}>X</button>
                 <Tools />
             </div>
         </nav>
