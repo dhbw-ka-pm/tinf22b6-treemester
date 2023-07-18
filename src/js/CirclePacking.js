@@ -82,8 +82,8 @@ function CirclePacking(props) {
                 .style('border', d => d === focus ? '1px solid black' : 'none')
                 .style('fill-opacity', d => d.parent === focus || d === focus ? 1 : 0)
                 .style('display', d => d.parent === focus || d === focus ? 'inline' : 'none')
-                .style('font-size', d => d === focus ? '18px' : '12px')
-                .style('font-weight', d => d === focus ? '600' : '200')
+                .style('font-size', d => d === focus ? '22px' : '13px')
+                .style('font-weight', d => d === focus ? '700' : '200')
                 .text(d => d.data.name);
 
             let width = d3.select('svg').node().getBBox().width;
@@ -133,8 +133,8 @@ function CirclePacking(props) {
                 label.filter(function (d) { return d.parent === focus || d === focus || this.style.display === 'inline' })
                     .transition(transition)
                     .style('fill-opacity', d => d.parent === focus || d === focus ? 1 : 0)
-                    .style('font-size', d => d === focus ? '18px' : '12px')
-                    .style('font-weight', d => d === focus ? '600' : '200')
+                    .style('font-size', d => d === focus ? '22px' : '13px')
+                    .style('font-weight', d => d === focus ? '700' : '200')
                     .on('start', function (d) { if (d.parent === focus || d === focus) this.style.display = 'inline' })
                     .on('end', function (d) { if (d.parent !== focus && d !== focus) this.style.display = 'none' });
             }
@@ -145,7 +145,7 @@ function CirclePacking(props) {
     }, [data]);
 
     return (
-        <svg height="100%" width="100%"></svg>
+        <svg height="100%" width="100%" ></svg>
     );
 }
 
