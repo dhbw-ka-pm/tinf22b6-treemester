@@ -118,13 +118,12 @@ function Navigation({handleToolbarCreateCircle, handleToolbarClose}) {
                     <span>Settings</span>
                     <ul>
                         <li>
-                            Options
-                        </li>
-                        <li>
                             Darkmode
                         </li>
                         <li>
-                            Help
+                            <Link to={toggleCurrentLink("about", "/tinf22b6-treemester/about")} onClick={() => toggleCurrent("about")} className={classNameAbout}>
+                                Help
+                            </Link>
                         </li>
                     </ul>
                 </Link>

@@ -33,11 +33,13 @@ function About() {
                     </p>
                 )}
                 <hr></hr>
-                <h3 onClick={() => toggleParagraph(1)}>How to create your first Mindmap</h3>
+                <h3 onClick={() => toggleParagraph(1)}>How to edit your first Mindmap</h3>
                 {showParagraphs.includes(1) ? (
-                    <p className="show">tba</p>
+                    <p className="show">
+                        Create a new Mindmap, click on a circle and use the tool bar to edit new subcircles!
+                    </p>
                 ) : (
-                    <p>tba</p>
+                    <p>Create a new Mindmap, click on a circle and use the tool bar to edit new subcircles!</p>
                 )}
                 <hr></hr>
                 <h3 onClick={() => toggleParagraph(2)}>What is a SprintLine?</h3>
