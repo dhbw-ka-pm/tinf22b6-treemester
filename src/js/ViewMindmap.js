@@ -110,7 +110,7 @@ function ViewMindmap() {
         d3.selectAll("circle")
             .data(descendants)
             .on('click', (event, d) => {
-                let v = d.children ? d : d.parent;
+                let v = d.children ? d : (d.parent ? d.parent : d);
                 if (focus !== v) {
                     zoom(event, v);
                     event.stopImmediatePropagation();
