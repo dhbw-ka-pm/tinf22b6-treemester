@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as d3 from 'd3';
 
-const Tools = ({ circleData, updateCircleData, setToolChanges}) => {
+const Tools = ({ circleData, updateCircleData, setToolChanges, toolChanges}) => {
     const [size, setSize] = useState(50);
     const [text, setText] = useState('');
 
@@ -30,7 +30,7 @@ const Tools = ({ circleData, updateCircleData, setToolChanges}) => {
         const updatedData = addCircleToTestData(circleData, selectedName, newCircle);
         updateCircleData(updatedData);
 
-        setToolChanges(true);
+        setToolChanges(!toolChanges);
     }
 
 
