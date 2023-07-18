@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE root SYSTEM "sprintline.dtd">
+<root>
+  <label id="0" sublabel="zeroest" boolean="false" text="mySprintline0"/>
+</root>

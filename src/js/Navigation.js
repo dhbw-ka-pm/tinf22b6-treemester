@@ -7,6 +7,8 @@ import SaveFile from "./SaveFile";
 import Tools from "./Tools";
 import "../css/Navigation.css"
 import { ReactSVG } from "react-svg";
+import CreateSprintline from "./CreateSprintline";
+import SprintlineDialog from "./Sprintline";
 
 function Navigation({handleToolbarCreateCircle, handleToolbarClose}) {
     const navigate = useNavigate();
@@ -67,6 +69,31 @@ function Navigation({handleToolbarCreateCircle, handleToolbarClose}) {
 
         navigate("/tinf22b6-treemester/view", { state: { file: xmlToDownload } });
     }
+    function createSprintFile() {
+        const root = xmlbuilder.create('root', { version: '1.0', encoding: 'UTF-8' });
+        root.dtd('sprintline.dtd');
+       
+        let fileName = document.getElementById("elementInput").value;
+
+        root.ele('label', {
+            id: "1",
+            sublabel: "first",
+            boolean: "true",
+            text: fileName
+        })
+        const xml = root.end({ pretty: true });
+
+        const xmlToDownload = new Blob([xml], { type: 'application/xml' });
+        const downloadLink = URL.createObjectURL(xmlToDownload);
+
+        const linkElement = document.createElement('a');
+        linkElement.href = downloadLink;
+        linkElement.download = fileName + ".xml";
+        linkElement.click();
+
+        navigate("/tinf22b6-treemester/view", { state: { file: xmlToDownload } });
+    }
+
 
     return (
         <>    
@@ -99,13 +126,16 @@ function Navigation({handleToolbarCreateCircle, handleToolbarClose}) {
                         </li>
 
                         <li>
-                            Create new Sprintline
+                           <CreateSprintline
+                                buttonText="Create new Sprintline"
+                                onSave={createSprintFile}
+                                defaultValue="mySprintline"
+                            />
                         </li>
 
                         <li>
-                             <ReactFileReader handleFiles={(files) => handleFiles(files)} fileTypes={[".xml"]}>
-                                <>Upload Sprintline</>
-                            </ReactFileReader>
+                        <SprintlineDialog
+                        />
                         </li>
 
                         <li onClick={handleShowToolbar}>
