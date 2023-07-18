@@ -68,6 +68,7 @@ function CirclePacking(props) {
                         clearTimeout(this.clickTimeout);
                         this.clickTimeout = null;
                     }
+
                 });
 
             // Texte zu allen Nodes hinzufuegen
@@ -142,6 +143,9 @@ function CirclePacking(props) {
         }
 
         draw();
+
+        console.log('Circle Packing: Data updared', data)
+        
     }, [data]);
 
     return (
