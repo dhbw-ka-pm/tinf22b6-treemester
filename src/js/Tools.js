@@ -20,10 +20,11 @@ const Tools = ({ circleData, updateCircleData, setToolChanges, toolChanges}) => 
             console.log("Kein Circle gefunden");
             return;
         }
-
+        console.log(selectedName);
+        
         const newCircle = {
             "name": text,
-            "radius": size,
+            "radius": parseInt(size),
             "children": []
         };
         
@@ -65,6 +66,7 @@ const Tools = ({ circleData, updateCircleData, setToolChanges, toolChanges}) => 
             event.preventDefault();
         }
     };
+    
 
     return (
         <>
