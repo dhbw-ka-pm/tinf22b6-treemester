@@ -109,14 +109,32 @@ function ViewMindmap() {
 
         d3.selectAll("circle")
             .data(descendants)
-            .on('click', (event, d) => {
-                let v = d.children ? d : (d.parent ? d.parent : d);
+            .on('dblclick', (event, d) => {
+                let v = d.children ? d : d.parent;
                 if (focus !== v) {
                     zoom(event, v);
                     event.stopImmediatePropagation();
                 } else if (v !== root) {
                     zoom(event, root);
                     event.stopImmediatePropagation();
+                }
+            })
+            .on('click', function (d, i) {
+                var self = this;
+                if (!this.clickTimeout) {
+                    this.clickTimeout = setTimeout(function () {
+                        if (self.isSelected) {
+                            d3.select(self).attr("stroke", "none");
+                            self.isSelected = false;
+                        } else {
+                            d3.select(self).attr("stroke", "#000");
+                            self.isSelected = true;
+                        }
+                        self.clickTimeout = null;
+                    }, 200);
+                } else {
+                    clearTimeout(this.clickTimeout);
+                    this.clickTimeout = null;
                 }
             })
 
@@ -127,9 +145,12 @@ function ViewMindmap() {
     }
 
     function zoom(event, d) {
+        if(!focus){
+            return;
+        }
         focus0 = focus;
         focus = d;
-
+        
         //Zoom Effekt
         const transition = svg.transition()
             .duration(750)
@@ -144,8 +165,8 @@ function ViewMindmap() {
             .filter(function (d) { return d.parent === focus || d === focus || this.getAttribute("display") === 'inline' })
             .transition(transition)
             .attr('fill-opacity', d => d.parent === focus || d === focus ? 1 : 0)
-            .attr('font-size', d => d === focus ? '18px' : '12px')
-            .attr('font-weight', d => d === focus ? '600' : '200')
+            .attr('font-size', d => d === focus ? '22px' : '13px')
+            .attr('font-weight', d => d === focus ? '700' : '200')
             .on('start', function (d) { if (d.parent === focus || d === focus) this.setAttribute("display", "inline") })
             .on('end', function (d) { if (d.parent !== focus && d !== focus) this.setAttribute("display", "none") });
     }

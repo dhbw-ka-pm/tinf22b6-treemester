@@ -25,7 +25,6 @@ svg g.svgRoot {
 }
 
 .circles {
-    cursor:pointer;
     margin-top: 100px;
     font-size: 0.5em;
     height: 80vh;
