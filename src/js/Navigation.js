@@ -10,7 +10,7 @@ import { ReactSVG } from "react-svg";
 import CreateSprintline from "./CreateSprintline";
 import SprintlineDialog from "./Sprintline";
 
-function Navigation({handleToolbarCreateCircle, handleToolbarClose}) {
+function Navigation() {
     const navigate = useNavigate();
     const [current, setCurrent] = useState("");
     var classNameAbout = "about";
@@ -137,10 +137,6 @@ function Navigation({handleToolbarCreateCircle, handleToolbarClose}) {
                         <SprintlineDialog
                         />
                         </li>
-
-                        <li onClick={handleShowToolbar}>
-                            Show Toolbar
-                        </li>
                     </ul>
                 </a>
 
@@ -159,15 +155,6 @@ function Navigation({handleToolbarCreateCircle, handleToolbarClose}) {
                 </Link>
             </div>
         </nav>
-
-        {showToolbar && (
-        <nav className="toolbar">
-            <div className="content-wrapper">
-            <button className="closeToolbar" onClick={handleShowToolbar}>X</button>
-                <Tools />
-            </div>
-        </nav>
-        )}
     </>
    ); 
 }
