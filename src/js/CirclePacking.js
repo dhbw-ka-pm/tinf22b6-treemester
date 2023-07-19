@@ -144,7 +144,7 @@ function CirclePacking(props) {
 
         draw();
 
-        console.log('Circle Packing: Data updared', data)
+        console.log('Circle Packing: Data updated', data)
         
     }, [data]);
 
