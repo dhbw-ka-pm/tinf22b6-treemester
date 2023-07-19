@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import "../css/ViewMindmap.css"
 import SaveFile from './SaveFile';
+import Tools from './Tools'
 
 var XMLParser = require('react-xml-parser');
 
@@ -42,8 +43,12 @@ function ViewMindmap() {
     }, [])
     return (
         <>
-            <div className="circles">
-            </div>
+            <nav className="toolbar">
+                <div className="content-wrapper">                    
+                    <Tools />  {/* TODO: Implementation */}
+                </div>
+            </nav>
+            <div className="circles"></div>
             <div className='saveFile'>
                 <SaveFile
                     buttonText="Download as XML-File"
