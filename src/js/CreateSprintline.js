@@ -1,22 +1,36 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, InputAdornment, TextField } from "@mui/material";
+import ReactFileReader from 'react-file-reader';
 import { useState } from "react";
 
-function SaveFile(props) {
+
+function CreateSprintline(props) {
+
     const [open, setOpen] = useState(false);
+    const [fileName, setFileName] = useState("");
     const [fileNameEmpty, setFileNameEmpty] = useState(false);
 
-    let defaultValue = props.defaultValue ? props.defaultValue : "myMindmap"
-
+    let defaultValue = props.defaultValue ? props.defaultValue : "MySprintline"
+    
+    const handleSave = () => {
+        if (fileName.length === 0) {
+          setFileNameEmpty(true);
+          return;
+        }
+    
+        props.onSave();
+        setOpen(false);
+      };
+    
     return (
         <>
             <button onClick={() => setOpen(true)}>{props.buttonText}</button>
             <Dialog open={open}>
                 <DialogTitle>{props.buttonText}</DialogTitle>
                 <DialogContent>
-                    <TextField id="fileNameInput"
-                        label="File Name"
+                    <TextField id="elementInput"
+                        label="Element Name"
                         type="text"
-                        placeholder={defaultValue}
+                        placeholder="your_sprint_element"
                         margin="dense"
                         variant="standard"
                         autoFocus
@@ -36,9 +50,10 @@ function SaveFile(props) {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => setOpen(false)}>Cancel</Button>
+                    <Button onClick={() => { setOpen(false);}}>Cancel</Button>
                     <Button onClick={() => {
-                        props.onSave()
+                        //handleSave();
+                        props.onSave();
                         setOpen(false);
                     }}>Save</Button>
                 </DialogActions>
@@ -47,4 +62,5 @@ function SaveFile(props) {
     )
 }
 
-export default SaveFile;
+
+export default CreateSprintline;

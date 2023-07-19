@@ -1,9 +1,0 @@
-.tools {
-    display: flex;
-    align-items: left;
-    justify-content: flex-end;
-}
-
-.tools a {
-    text-align: center;
-}

@@ -1,0 +1,14 @@
+<!DOCTYPE root [
+  <!ELEMENT root (label, sublabel*)>
+  <!ELEMENT label (#PCDATA)>
+  <!ELEMENT sublabel (label, boolean)>
+  <!ELEMENT boolean (#PCDATA)>
+
+  <!ATTLIST label
+    id ID #REQUIRED
+  >
+
+  <!ATTLIST boolean
+    value (true|false) #REQUIRED
+  >
+]>
