@@ -39,7 +39,7 @@
     justify-content: flex-end;
 }
 
-.links a {
+.links .link {
     display: inline-block;
     text-align: center;
     color: white;
@@ -48,7 +48,7 @@
     position: relative;
 }
 
-.links a::before {
+.links .link::before {
     content: "";
     position: absolute;
     bottom: -5px;
@@ -60,11 +60,11 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.links a:hover::before {
+.links .link:hover::before {
     transform: scaleX(1);
 }
 
-.links a ul {
+.links .link ul {
     display: none;
     list-style: none;
     position: absolute;
@@ -80,7 +80,7 @@
     pointer-events: none;
 }
 
-.links a:hover ul {
+.links .link:hover ul {
     display: block;
     opacity: 1;
     pointer-events: auto;

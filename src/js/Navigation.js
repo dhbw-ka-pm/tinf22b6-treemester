@@ -97,17 +97,17 @@ function Navigation() {
         <>    
         <nav className="navigation">
             <div className="start">
-                <Link to="/tinf22b6-treemester" onClick={() => setCurrent("circlePacking")}>
+                <Link className="link" to="/tinf22b6-treemester" onClick={() => setCurrent("circlePacking")}>
                     <p className="label">&#x1F333; Treemester</p>
                 </Link>
 
             </div>
             <div className="links">
-                <Link to={toggleCurrentLink("about", "/tinf22b6-treemester/about")} onClick={() => toggleCurrent("about")} className={classNameAbout}>
+                <Link className={"link " + classNameAbout} to={toggleCurrentLink("about", "/tinf22b6-treemester/about")} onClick={() => toggleCurrent("about")}>
                     <span>About</span>
                 </Link>
 
-                <a>
+                <div className="link" >
                     <span>Edit</span>
                     <ul>
                         <li>
@@ -136,21 +136,21 @@ function Navigation() {
                         />
                         </li>
                     </ul>
-                </a>
+                </div>
 
-                <Link to="/tinf22b6-treemester" onClick={() => setCurrent("circlePacking")} >
+                <div className="link">
                     <span>Settings</span>
                     <ul>
                         <li>
                             Darkmode
                         </li>
                         <li>
-                            <Link to={toggleCurrentLink("about", "/tinf22b6-treemester/about")} onClick={() => toggleCurrent("about")} className={classNameAbout}>
+                            <Link to={toggleCurrentLink("about", "/tinf22b6-treemester/about")} onClick={() => toggleCurrent("about")} className={"link " + classNameAbout}>
                                 Help
                             </Link>
                         </li>
                     </ul>
-                </Link>
+                </div>
             </div>
         </nav>
     </>
