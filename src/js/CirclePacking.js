@@ -31,6 +31,7 @@ function CirclePacking(props) {
 
             // Farbverlauf der Kreise von aussen nach innen
             const color = d3.scaleSequential([maxDepth, 0], d3.interpolate('#b9f0e2', '#3b77a8'));
+            let selectedNode = null;
             // Kreise zu allen Nodes hinzufuegen
             const node = g.selectAll('node')
                 .data(root.descendants())
@@ -59,8 +60,14 @@ function CirclePacking(props) {
                                 d3.select(self).attr("stroke", "none");
                                 self.isSelected = false;
                             } else {
+                                if(selectedNode && selectedNode !== self) {
+                                    d3.select(selectedNode).attr("stroke","none");
+                                    selectedNode.isSelected = false;
+                                }
+
                                 d3.select(self).attr("stroke", "#000");
                                 self.isSelected = true;
+                                selectedNode = self;
                             }
                             self.clickTimeout = null;
                         }, 200);
