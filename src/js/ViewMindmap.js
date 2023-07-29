@@ -60,7 +60,7 @@ function ViewMindmap() {
 
             getXSL((_) => {convertFile(file)})
         }
-    })
+    }, [state])
 
     return (
         <>
