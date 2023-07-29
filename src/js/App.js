@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import '../css/App.css';
-import CirclePacking from './CirclePacking';
 import About from './About';
 import Layout from './Layout';
-import Tools from './Tools';
 
 import {
     BrowserRouter,
