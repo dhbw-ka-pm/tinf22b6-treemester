@@ -22,21 +22,25 @@ var intialCircleData = ({
             "children": [
                 {
                     "name": "Bubble Sort",
-                    "radius": 55
+                    "radius": 55,
+                    "children": []
                 },
                 {
                     "name": "Insertion Sort",
-                    "radius": 65
+                    "radius": 65,
+                    "children": []
                 },
                 {
                     "name": "Merge Sort",
-                    "radius": 50
+                    "radius": 50,
+                    "children": []
                 }
             ]
         },
         {
             "name": "Turingmaschinen",
-            "radius": 55
+            "radius": 55,
+            "children": []
         },
         {
             "name": "Vollständige Induktion",
@@ -44,18 +48,22 @@ var intialCircleData = ({
             "children": [
                 {
                     "name": "Induktionsanfang",
-                    "radius": 50
+                    "radius": 50,
+                    "children": []
                 },
                 {
                     "name": "Induktionsschritt",
+                    "radius": 150,
                     "children": [
                         {
                             "name": "Induktionsannahme",
-                            "radius": 45
+                            "radius": 45,
+                            "children": []
                         },
                         {
                             "name": "Induktionsbehauptung",
-                            "radius": 55
+                            "radius": 55,
+                            "children": []
                         },
                     ]
                 }

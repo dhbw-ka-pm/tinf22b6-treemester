@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import * as d3 from 'd3';
+import ToolsTooltip from './ToolsTooltip';
+import { right } from '@popperjs/core';
 
 const Tools = ({ circleData, updateCircleData, setToolChanges, toolChanges}) => {
     const [size, setSize] = useState(50);
     const [text, setText] = useState('');
-
+    const [tooltipVisible, setTooltipVisible] = useState(false);
+    const [tooltipMessage, setTooltipMessage] = useState("");
+  
 
     const handleSizeChange = (e) => {
         setSize(e.target.value);
@@ -15,20 +19,29 @@ const Tools = ({ circleData, updateCircleData, setToolChanges, toolChanges}) => 
     };
 
     const handleAddCircle = () => {
-        var selectedName = findOutName();
-        if (selectedName === null) {
+        var selectedNode = findOutNode();
+        if (selectedNode === null) {
             console.log("Kein Circle gefunden");
             return;
         }
-        console.log(selectedName);
+        console.log(selectedNode);
         
         const newCircle = {
             "name": text,
             "radius": parseInt(size),
             "children": []
         };
-        
-        const updatedData = addCircleToTestData(circleData, selectedName, newCircle);
+
+        if(circleSizeUnfitting(selectedNode, newCircle)){
+            setTooltipMessage("Can't add the circle - too big");
+            setTooltipVisible(true);
+            setTimeout(() => {
+                setTooltipVisible(false);
+              }, 3000);  
+            return;
+        }
+
+        const updatedData = addCircleToTestData(circleData, selectedNode.name, newCircle);
         updateCircleData(updatedData);
 
         setToolChanges(!toolChanges);
@@ -48,17 +61,30 @@ const Tools = ({ circleData, updateCircleData, setToolChanges, toolChanges}) => 
         return node;
     }
 
-    function findOutName() {
+    function findOutNode() {
         const node = d3.selectAll("circle")
             .filter(function () { return d3.select(this).attr('stroke') === '#000'; })
         if (node.empty()) {
             return null;
         } else {
-            return node.datum().data.name;
+            return node.datum().data;
         }
-
     }
 
+    function circleSizeUnfitting(selectedNode, newCircle){
+        const nodeSize = selectedNode.radius;
+        let childrenSize = 0;
+        
+        if (selectedNode.children && selectedNode.children.length > 0) {
+            selectedNode.children.forEach(element => {
+              childrenSize += element !== null ? element.radius : 0;
+            });
+        }
+
+        childrenSize += newCircle.radius;
+        
+        return childrenSize > nodeSize;
+    }
 
     const handleSizeKeyPress = (event) => {
         const charCode = event.which ? event.which : event.keyCode;
@@ -67,7 +93,6 @@ const Tools = ({ circleData, updateCircleData, setToolChanges, toolChanges}) => 
         }
     };
     
-
     return (
         <>
             <p>
@@ -83,6 +108,8 @@ const Tools = ({ circleData, updateCircleData, setToolChanges, toolChanges}) => 
                 </label>
             </p>
             <button onClick={handleAddCircle}>Create Circle</button>
+            
+            <ToolsTooltip isVisible={tooltipVisible} message={tooltipMessage} alignment={right} />
         </>
     );
 };
