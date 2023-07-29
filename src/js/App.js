@@ -14,9 +14,11 @@ import ViewMindmap from './ViewMindmap';
 
 var intialCircleData = ({
     "name": "Theoretische Informatik",
+    "radius": 800,
     "children": [
         {
             "name": "Sortieralgorithmen",
+            "radius": 300,
             "children": [
                 {
                     "name": "Bubble Sort",
@@ -38,6 +40,7 @@ var intialCircleData = ({
         },
         {
             "name": "Vollständige Induktion",
+            "radius": 300,
             "children": [
                 {
                     "name": "Induktionsanfang",
