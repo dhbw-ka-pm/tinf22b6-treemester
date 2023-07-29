@@ -1,7 +1,6 @@
 import * as d3 from 'd3';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
 import "../css/ViewMindmap.css"
 import SaveFile from './SaveFile';
 import Tools from './Tools'
@@ -9,13 +8,18 @@ import Tools from './Tools'
 var XMLParser = require('react-xml-parser');
 
 var xslFile = require("../xml/transformMindmap.xsl");
+var xmlSampleData = require("../xml/sampleData.xml");
 let rootForDownload = " ";
 
 var xml_doc;
 
 function ViewMindmap() {
-    const navigate = useNavigate();
     const { state } = useLocation();
+
+    const [toolChanges, setToolChanges] = useState(false);
+    const [circleData, setCircleData] = useState();
+
+    var canDownload = !state ? false : true;
 
     let file;
     let xsl;
@@ -24,38 +28,57 @@ function ViewMindmap() {
     var focus;
     var focus0;
     const headerOffset = 150;
+    let selectedNode = null;
+
+    useEffect(() => {
+        xml_doc = circleData;
+    }, [circleData])
+
+
+    const getXSL = (functionAfter) => {
+        fetch(xslFile)
+            .then(response => response.text())
+            .then(text => xsl = text)
+            .then(() => {
+                functionAfter(xml_doc)
+            })
+    }
 
     useEffect(() => {
         if (!state) {
-            navigate("/tinf22b6-treemester")
+            fetch(xmlSampleData)
+                .then(response => response.text())
+                .then(text => {
+                    var parser = new DOMParser();
+                    setCircleData(parser.parseFromString(text, "text/xml"));
+
+                    getXSL((data) => { transformXML(data) });
+                })
         }
         else {
             file = state.file;
 
-            fetch(xslFile)
-                .then(response => response.text())
-                .then(text => xsl = text)
-                .then(() => {
-                    convertFile(file);
-                })
-
+            getXSL((_) => {convertFile(file)})
         }
-    }, [])
+    })
+
     return (
         <>
             <nav className="toolbar">
-                <div className="content-wrapper">                    
-                    <Tools />  {/* TODO: Implementation */}
+                <div className="content-wrapper">
+                    <Tools circleData={circleData} updateCircleData={(data) => { setCircleData(data); getXSL((data) => {transformXML(data)}); }} toolChanges={toolChanges} setToolChanges={setToolChanges} />
                 </div>
             </nav>
             <div className="circles"></div>
-            <div className='saveFile'>
-                <SaveFile
-                    buttonText="Download as XML-File"
-                    onSave={() => downloadXML(rootForDownload)}
-                    defaultValue="myMindmap"
-                />
-            </div>
+            {canDownload &&
+                <div className='saveFile'>
+                    <SaveFile
+                        buttonText="Download as XML-File"
+                        onSave={() => downloadXML(rootForDownload)}
+                        defaultValue="myMindmap"
+                    />
+                </div>
+            }
         </>
     );
 
@@ -63,8 +86,9 @@ function ViewMindmap() {
         var reader = new FileReader();
         reader.onload = function () {
             var parser = new DOMParser();
-            xml_doc = parser.parseFromString(reader.result, "text/xml");
-            transformXML(xml_doc)
+            let parsedXML = parser.parseFromString(reader.result, "text/xml")
+            setCircleData(parsedXML)
+            transformXML(parsedXML)
         }
         reader.readAsText(file);
     }
@@ -75,7 +99,7 @@ function ViewMindmap() {
         var xsl_doc = parser.parseFromString(xsl, "text/xml");
         processor.importStylesheet(xsl_doc);
         let res = processor.transformToDocument(xml, document);
-        renderSVG(res.documentElement, new XMLSerializer().serializeToString(xml))
+        renderSVG(res.documentElement, new XMLSerializer().serializeToString(xml)) //adds xmlns
     }
 
     function renderSVG(element, xml) {
@@ -132,8 +156,14 @@ function ViewMindmap() {
                             d3.select(self).attr("stroke", "none");
                             self.isSelected = false;
                         } else {
+                            if (selectedNode && selectedNode !== self) {
+                                d3.select(selectedNode).attr("stroke", "none");
+                                selectedNode.isSelected = false;
+                            }
+
                             d3.select(self).attr("stroke", "#000");
                             self.isSelected = true;
+                            selectedNode = self;
                         }
                         self.clickTimeout = null;
                     }, 200);
@@ -150,12 +180,12 @@ function ViewMindmap() {
     }
 
     function zoom(event, d) {
-        if(!focus){
+        if (!focus) {
             return;
         }
         focus0 = focus;
         focus = d;
-        
+
         //Zoom Effekt
         const transition = svg.transition()
             .duration(750)
