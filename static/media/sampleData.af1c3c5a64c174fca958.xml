@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE root SYSTEM "mindmapData.dtd">
+<?xml-stylesheet href="transformMindmap.xsl" type="text/xsl"?>
+<root>
+    <node id="N1" x="0" y="0" color="rgb(59, 119, 168)" radius="273.278" text="Theoretische Informatik">
+        <node id="N2" x="-99.1991" y="-112.515" color="rgb(101, 159, 187)" radius="123.278"
+            text="Sortieralgorithmen">
+            <node id="N3" x="-164.472" y="-132.548" color="white" radius="55" text="Bubble Sort"></node>
+            <node id="N4" x="-44.4723" y="-132.548" color="white" radius="65" text="Insertion Sort"></node>
+            <node id="N5" x="-113.639" y="-40.6732" color="white" radius="50" text="Merge Sort"></node>
+        </node>
+        <node id="N6" x="79.0792" y="-112.515" color="white" radius="55" text="Turingmaschinen"></node>
+        <node id="N7" x="81.5273" y="92.4707" color="rgb(101, 159, 187)" radius="150"
+            text="Vollstaendige Induktion">
+            <node id="N8" x="-18.4727" y="92.4707" color="white" radius="50" text="Induktionsanfang"></node>
+            <node id="N9" x="131.527" y="92.4707" color="rgb(143, 200, 207)" radius="100"
+                text="Induktionsschritt">
+                <node id="N10" x="76.5273" y="92.4707" color="white" radius="45" text="Induktionsannahme"></node>
+                <node id="N11" x="176.527" y="92.4707" color="white" radius="55" text="Induktionsbehauptung"></node>
+            </node>
+        </node>
+    </node>
+</root>

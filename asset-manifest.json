@@ -1,14 +1,15 @@
 {
   "files": {
-    "main.css": "/tinf22b6-treemester/static/css/main.3e6d5fde.css",
-    "main.js": "/tinf22b6-treemester/static/js/main.1deb0d80.js",
+    "main.css": "/tinf22b6-treemester/static/css/main.3fd6cccd.css",
+    "main.js": "/tinf22b6-treemester/static/js/main.326b664b.js",
     "static/media/transformMindmap.xsl": "/tinf22b6-treemester/static/media/transformMindmap.e888ffed079664e0164f.xsl",
+    "static/media/sampleData.xml": "/tinf22b6-treemester/static/media/sampleData.af1c3c5a64c174fca958.xml",
     "index.html": "/tinf22b6-treemester/index.html",
-    "main.3e6d5fde.css.map": "/tinf22b6-treemester/static/css/main.3e6d5fde.css.map",
-    "main.1deb0d80.js.map": "/tinf22b6-treemester/static/js/main.1deb0d80.js.map"
+    "main.3fd6cccd.css.map": "/tinf22b6-treemester/static/css/main.3fd6cccd.css.map",
+    "main.326b664b.js.map": "/tinf22b6-treemester/static/js/main.326b664b.js.map"
   },
   "entrypoints": [
-    "static/css/main.3e6d5fde.css",
-    "static/js/main.1deb0d80.js"
+    "static/css/main.3fd6cccd.css",
+    "static/js/main.326b664b.js"
   ]
 }
