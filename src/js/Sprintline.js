@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-import { Drawer, List, ListItem, ListItemText, Checkbox, Popover, IconButton, SvgIcon} from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import {List, ListItem, ListItemText, Checkbox, Popover} from '@mui/material';
 
-import { padding } from '@mui/system';
-
-function SprintlineDrawer() {
+function SprintlineDrawer({xmlDocument}) {
   const [open, setOpen] = useState(false);
+  const [labels, setLabels] = useState([]);
 
   const handleOpenDrawer = () => {
     setOpen(true);
@@ -13,42 +12,40 @@ function SprintlineDrawer() {
   const handleCloseDrawer = () => {
     setOpen(false);
   };
-  function CloseButtonIcon(props) {
-    return (
-      <SvgIcon {...props}>
-        <path d="public\close-button.svg" />
-      </SvgIcon>
-    );
-  }
+
+  useEffect(() => {
+    if (xmlDocument) {
+    
+      const labelElements = xmlDocument.getElementsByTagName('label');
+      const labelsArr = extractLabelsFromXml(labelElements);
+      setLabels(labelsArr);
+    }
+  }, [xmlDocument]);
+
+  const extractLabelsFromXml = (labelElements) => {
+    const labelsArr = [];
+    for (let i = 0; i < labelElements.length; i++) {
+      const labelName = labelElements[i].textContent;
+      labelsArr.push({ name: labelName });
+    }
+    return labelsArr;
+  };
 
   return (
     <>
       <button onClick={handleOpenDrawer}>Sprintline</button>
       <Popover anchor="left" open={open} onClose={handleCloseDrawer} style={{ marginTop: '125px', marginBottom: '20px' }}>
-      <IconButton onClick={handleCloseDrawer} style={{ position: 'absolute', top: '8px', right: '8px' }}>
-          <CloseButtonIcon />
-        </IconButton>
         <List>
-          <ListItem>
-          <Checkbox />
-            <ListItemText primary="Sortieralgorithmen" />
-          </ListItem>
-          <ListItem style={{ paddingLeft: '20px' }}>
-            <Checkbox />
-            <ListItemText primary="Bubble Sort" />
-          </ListItem>
-          <ListItem style={{ paddingLeft: '20px' }}>
-            <Checkbox />
-            <ListItemText primary="Insertion Sort" />
-          </ListItem>
-          <ListItem style={{ paddingLeft: '20px' }}>
-            <Checkbox />
-            <ListItemText primary="Merge Sort" />
-          </ListItem>
+          {labels.map((label, index) => (
+            <ListItem key={index}>
+              <Checkbox />
+              <ListItemText primary={label.name} />
+            </ListItem>
+          ))}
         </List>
       </Popover>
     </>
   );
-}
+};
 
 export default SprintlineDrawer;

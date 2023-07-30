@@ -6,7 +6,7 @@ import xmlbuilder from 'xmlbuilder';
 import SaveFile from "./SaveFile";
 import "../css/Navigation.css"
 import CreateSprintline from "./CreateSprintline";
-import SprintlineDialog from "./Sprintline";
+import SprintlineDrawer from "./Sprintline";
 
 function Navigation() {
     const navigate = useNavigate();
@@ -26,7 +26,7 @@ function Navigation() {
     const handleShowToolbar = () => {
         setShowToolbar(!showToolbar);
     };
-
+    const [xmlDocument, setXmlDocument] = useState(null);
     switch (current) {
         case "about":
             classNameAbout = "currentPage";
@@ -35,9 +35,19 @@ function Navigation() {
             break;
     }
     
-    function handleFiles(files) {
-        navigate("/tinf22b6-treemester/view", { state: { file: files[0] } });
-    }
+    function handleFiles(files, sprintline) {
+        if (!sprintline) {
+            navigate("/tinf22b6-treemester/view", { state: { file: files[0] } });
+          } else {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const parser = new DOMParser();
+              const xmlDoc = parser.parseFromString(e.target.result, "text/xml");
+              setXmlDocument(xmlDoc);
+            };
+            reader.readAsText(files[0]);
+          }
+        }
 
     function createFile() {
         const root = xmlbuilder.create('root', { version: '1.0', encoding: 'UTF-8' });
@@ -73,13 +83,13 @@ function Navigation() {
        
         let fileName = document.getElementById("elementInput").value;
 
-        root.ele('label', {
-            id: "1",
-            sublabel: "first",
-            boolean: "true",
-            text: fileName
-        })
-        const xml = root.end({ pretty: true });
+       
+        const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE root SYSTEM "sprintline.dtd">
+<root>
+  <label>Label 1</label>
+</root>`.trim();
+
 
         const xmlToDownload = new Blob([xml], { type: 'application/xml' });
         const downloadLink = URL.createObjectURL(xmlToDownload);
@@ -118,7 +128,7 @@ function Navigation() {
                             />
                         </li>
                         <li>
-                            <ReactFileReader handleFiles={(files) => handleFiles(files)} fileTypes={[".xml"]}>
+                            <ReactFileReader handleFiles={(files) => handleFiles(files,false)} fileTypes={[".xml"]}>
                                 <>Upload Mindmap</>
                             </ReactFileReader>
                         </li>
@@ -132,12 +142,13 @@ function Navigation() {
                         </li>
 
                         <li>
-                        <SprintlineDialog
-                        />
+                        <ReactFileReader handleFiles={(files) => handleFiles(files,true)} fileTypes={[".xml"]}>
+                                <>Upload Sprintline</>
+                            </ReactFileReader>
                         </li>
                     </ul>
                 </div>
-
+                
                 <div className="link">
                     <span>Settings</span>
                     <ul>
@@ -151,6 +162,7 @@ function Navigation() {
                         </li>
                     </ul>
                 </div>
+                {xmlDocument && <SprintlineDrawer xmlDocument={xmlDocument} />}
             </div>
         </nav>
     </>
