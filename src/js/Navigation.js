@@ -4,11 +4,9 @@ import ReactFileReader from 'react-file-reader';
 import { useNavigate } from "react-router-dom";
 import xmlbuilder from 'xmlbuilder';
 import SaveFile from "./SaveFile";
-import Tools from "./Tools";
 import "../css/Navigation.css"
-import { ReactSVG } from "react-svg";
 import CreateSprintline from "./CreateSprintline";
-import SprintlineDialog from "./Sprintline";
+import SprintlineDrawer from "./Sprintline";
 
 function Navigation() {
     const navigate = useNavigate();
@@ -28,7 +26,7 @@ function Navigation() {
     const handleShowToolbar = () => {
         setShowToolbar(!showToolbar);
     };
-
+    const [xmlDocument, setXmlDocument] = useState(null);
     switch (current) {
         case "about":
             classNameAbout = "currentPage";
@@ -37,9 +35,19 @@ function Navigation() {
             break;
     }
     
-    function handleFiles(files) {
-        navigate("/tinf22b6-treemester/view", { state: { file: files[0] } });
-    }
+    function handleFiles(files, sprintline) {
+        if (!sprintline) {
+            navigate("/tinf22b6-treemester/view", { state: { file: files[0] } });
+          } else {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const parser = new DOMParser();
+              const xmlDoc = parser.parseFromString(e.target.result, "text/xml");
+              setXmlDocument(xmlDoc);
+            };
+            reader.readAsText(files[0]);
+          }
+        }
 
     function createFile() {
         const root = xmlbuilder.create('root', { version: '1.0', encoding: 'UTF-8' });
@@ -75,13 +83,13 @@ function Navigation() {
        
         let fileName = document.getElementById("elementInput").value;
 
-        root.ele('label', {
-            id: "1",
-            sublabel: "first",
-            boolean: "true",
-            text: fileName
-        })
-        const xml = root.end({ pretty: true });
+       
+        const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE root SYSTEM "sprintline.dtd">
+<root>
+  <label>Label 1</label>
+</root>`.trim();
+
 
         const xmlToDownload = new Blob([xml], { type: 'application/xml' });
         const downloadLink = URL.createObjectURL(xmlToDownload);
@@ -99,17 +107,17 @@ function Navigation() {
         <>    
         <nav className="navigation">
             <div className="start">
-                <Link to="/tinf22b6-treemester" onClick={() => setCurrent("circlePacking")}>
+                <Link className="link" to="/tinf22b6-treemester" onClick={() => setCurrent("circlePacking")}>
                     <p className="label">&#x1F333; Treemester</p>
                 </Link>
 
             </div>
             <div className="links">
-                <Link to={toggleCurrentLink("about", "/tinf22b6-treemester/about")} onClick={() => toggleCurrent("about")} className={classNameAbout}>
+                <Link className={"link " + classNameAbout} to={toggleCurrentLink("about", "/tinf22b6-treemester/about")} onClick={() => toggleCurrent("about")}>
                     <span>About</span>
                 </Link>
 
-                <a>
+                <div className="link" >
                     <span>Edit</span>
                     <ul>
                         <li>
@@ -120,7 +128,7 @@ function Navigation() {
                             />
                         </li>
                         <li>
-                            <ReactFileReader handleFiles={(files) => handleFiles(files)} fileTypes={[".xml"]}>
+                            <ReactFileReader handleFiles={(files) => handleFiles(files,false)} fileTypes={[".xml"]}>
                                 <>Upload Mindmap</>
                             </ReactFileReader>
                         </li>
@@ -134,25 +142,27 @@ function Navigation() {
                         </li>
 
                         <li>
-                        <SprintlineDialog
-                        />
+                        <ReactFileReader handleFiles={(files) => handleFiles(files,true)} fileTypes={[".xml"]}>
+                                <>Upload Sprintline</>
+                            </ReactFileReader>
                         </li>
                     </ul>
-                </a>
-
-                <Link to="/tinf22b6-treemester" onClick={() => setCurrent("circlePacking")} >
+                </div>
+                
+                <div className="link">
                     <span>Settings</span>
                     <ul>
                         <li>
                             Darkmode
                         </li>
                         <li>
-                            <Link to={toggleCurrentLink("about", "/tinf22b6-treemester/about")} onClick={() => toggleCurrent("about")} className={classNameAbout}>
+                            <Link to={toggleCurrentLink("about", "/tinf22b6-treemester/about")} onClick={() => toggleCurrent("about")} className={"link " + classNameAbout}>
                                 Help
                             </Link>
                         </li>
                     </ul>
-                </Link>
+                </div>
+                {xmlDocument && <SprintlineDrawer xmlDocument={xmlDocument} />}
             </div>
         </nav>
     </>
