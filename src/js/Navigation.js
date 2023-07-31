@@ -153,9 +153,6 @@ function Navigation() {
                     <span>Settings</span>
                     <ul>
                         <li>
-                            Darkmode
-                        </li>
-                        <li>
                             <Link to={toggleCurrentLink("about", "/tinf22b6-treemester/about")} onClick={() => toggleCurrent("about")} className={"link " + classNameAbout}>
                                 Help
                             </Link>
