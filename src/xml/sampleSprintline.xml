@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE root SYSTEM "sprintline.dtd">
 <root>
-  <label id="0" sublabel="zeroest" boolean="false" text="mySprintline0"/>
+<label>Theoretische Informatik II</label>
+<label>Analysis</label>
+<label>Intercultural Communications</label>
+<label>Wissenschaftliches Arbeiten</label>
+<label>Webengineering</label>
+<label>Marketing</label>
+<label>Programmieren</label>
+<label>Anwendungsprojekt Informatik</label>
 </root>
