@@ -29,7 +29,6 @@ const Tools = ({ circleData, updateCircleData, setToolChanges, toolChanges }) =>
     const handleAddCircle = () => {
         var selectedNode = findOutNode();
         if (selectedNode === null) {
-            console.log("Kein Circle gefunden");
             return;
         }
 
